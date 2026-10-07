@@ -1,0 +1,21 @@
+services:
+  sms-center:
+    build: .
+    restart: unless-stopped
+    ports:
+      - '127.0.0.1:3000:3000'
+    environment:
+      NODE_ENV: production
+      ADMIN_USERNAME: ${ADMIN_USERNAME:-admin}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
+      ADMIN_ORIGINS: ${ADMIN_ORIGINS:?Set your HTTPS management origin}
+      TRUST_PROXY: '1'
+    volumes:
+      - sms-data:/app/server/data
+    logging:
+      driver: json-file
+      options:
+        max-size: '10m'
+        max-file: '3'
+volumes:
+  sms-data:

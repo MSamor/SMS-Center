@@ -1,0 +1,13 @@
+.git
+.idea
+node_modules
+**/node_modules
+**/.env
+server/data
+admin/dist
+android
+artifacts
+test-results
+playwright-report
+server/public
+server/.public-build-*

@@ -1,0 +1,13 @@
+node_modules
+package-lock.json
+admin/dist
+android/.gradle
+android/build
+android/app/build
+android/gradlew
+android/gradlew.bat
+artifacts
+server/data
+
+server/public
+server/.public-build-*

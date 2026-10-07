@@ -1,0 +1,19 @@
+{
+  "name": "@sms-center/admin",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.5.43",
+    "lucide-vue-next": "^0.468.0"
+  },
+  "devDependencies": {
+    "vite": "^8.3.3",
+    "@vitejs/plugin-vue": "^6.0.9"
+  }
+}

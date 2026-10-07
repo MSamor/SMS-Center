@@ -1,0 +1,6590 @@
+{
+  "files": [
+    "admin/src/App.vue",
+    "admin/src/api.js",
+    "admin/src/components/InitialPassword.vue",
+    "admin/src/components/Modal.vue",
+    "admin/src/components/Pagination.vue",
+    "admin/src/main.js",
+    "admin/src/pages/Audits.vue",
+    "admin/src/pages/Devices.vue",
+    "admin/src/pages/Messages.vue",
+    "admin/src/pages/Overview.vue",
+    "admin/src/pages/Settings.vue",
+    "admin/src/pages/Tokens.vue",
+    "admin/src/style.css"
+  ],
+  "detectorHits": [
+    {
+      "detector": "element-ui-usage",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 113,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "element-ui-usage",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 172,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "element-ui-usage",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 200,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "element-ui-usage",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 79,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "element-ui-usage",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 115,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "element-ui-usage",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 143,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "element-ui-usage",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 157,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 191,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 207,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 232,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 241,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 255,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 269,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 275,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 276,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 193,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 216,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 234,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 257,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 271,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/components/InitialPassword.vue",
+      "line": 89,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/components/InitialPassword.vue",
+      "line": 94,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/components/InitialPassword.vue",
+      "line": 91,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/components/InitialPassword.vue",
+      "line": 96,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/components/Modal.vue",
+      "line": 39,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/components/Modal.vue",
+      "line": 41,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/components/Pagination.vue",
+      "line": 17,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/components/Pagination.vue",
+      "line": 25,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/components/Pagination.vue",
+      "line": 32,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Audits.vue",
+      "line": 47,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Devices.vue",
+      "line": 86,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Devices.vue",
+      "line": 96,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Devices.vue",
+      "line": 120,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Devices.vue",
+      "line": 125,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Devices.vue",
+      "line": 158,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Devices.vue",
+      "line": 160,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Devices.vue",
+      "line": 173,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Devices.vue",
+      "line": 182,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Devices.vue",
+      "line": 88,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Devices.vue",
+      "line": 98,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Devices.vue",
+      "line": 127,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Devices.vue",
+      "line": 162,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Devices.vue",
+      "line": 175,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 112,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 113,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 154,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 161,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 184,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 201,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 115,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 168,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 186,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 86,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 205,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 213,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 207,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 215,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 111,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 138,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 148,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 176,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 188,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 216,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 153,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 190,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 93,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 102,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 141,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 204,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 206,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 219,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 223,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 149,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 208,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-button",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 221,
+      "conclusion": "false_positive",
+      "reason": "独立 Vue 3 项目，未接入 ABC 私有组件库；语义化原生按钮符合本项目选择。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 176,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 183,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/components/InitialPassword.vue",
+      "line": 61,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/components/InitialPassword.vue",
+      "line": 70,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/components/InitialPassword.vue",
+      "line": 80,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Audits.vue",
+      "line": 40,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Audits.vue",
+      "line": 35,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Audits.vue",
+      "line": 42,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Devices.vue",
+      "line": 147,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Devices.vue",
+      "line": 154,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Devices.vue",
+      "line": 172,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 93,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 110,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 111,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 104,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 87,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 94,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 101,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 123,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 130,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 199,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 201,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 206,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 210,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 172,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 187,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 194,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 201,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 179,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-input",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 218,
+      "conclusion": "false_positive",
+      "reason": "独立项目使用原生表单，label 关联、HTML 约束与服务端 Zod 校验均已核对。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Audits.vue",
+      "line": 56,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Audits.vue",
+      "line": 58,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Audits.vue",
+      "line": 68,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Audits.vue",
+      "line": 69,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Audits.vue",
+      "line": 73,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Audits.vue",
+      "line": 74,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Audits.vue",
+      "line": 79,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Audits.vue",
+      "line": 80,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Audits.vue",
+      "line": 81,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Audits.vue",
+      "line": 57,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Audits.vue",
+      "line": 59,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Audits.vue",
+      "line": 60,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Audits.vue",
+      "line": 61,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Audits.vue",
+      "line": 62,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Audits.vue",
+      "line": 63,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Audits.vue",
+      "line": 64,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 132,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 134,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 144,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 145,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 148,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 149,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 150,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 151,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 152,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 133,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 135,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 136,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 137,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 138,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 139,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 140,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 218,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 220,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 228,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 229,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 232,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 233,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 234,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 219,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 221,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 222,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 223,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 224,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 159,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 161,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 170,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 171,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 172,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 173,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 174,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 175,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 160,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 162,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 163,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 164,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 165,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 166,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 105,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 107,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 118,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 119,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 123,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 124,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 131,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 132,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 135,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 140,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 106,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 108,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 109,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 110,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 111,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 112,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 113,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "native-html-table",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 114,
+      "conclusion": "false_positive",
+      "reason": "使用语义化原生表格，横向滚动支持窄屏；ABC 私有表格要求不适用于该项目。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "div-simulated-components",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/components/Modal.vue",
+      "line": 26,
+      "conclusion": "false_positive",
+      "reason": "命中共享分页容器，不是将 div 伪装成交互控件，实际交互使用 button。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "div-simulated-components",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/components/Pagination.vue",
+      "line": 14,
+      "conclusion": "false_positive",
+      "reason": "命中共享分页容器，不是将 div 伪装成交互控件，实际交互使用 button。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "wrong-icon-usage",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 120,
+      "conclusion": "false_positive",
+      "reason": "SVG 为趋势数据图表，图标统一使用 lucide-vue-next，未另建图标系统。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 119,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 151,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 156,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 191,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 206,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 269,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 306,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 348,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 414,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 470,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 483,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 489,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 502,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 534,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 613,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 660,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 671,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 680,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 713,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 730,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 739,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 762,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 793,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 799,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 822,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 875,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 887,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 900,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 911,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 917,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 938,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 967,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 979,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 1002,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 1024,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 1055,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 1077,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 1142,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 1151,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 1154,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 1171,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 1218,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 1253,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 1274,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "abc-button-spacing",
+      "categories": [
+        "ui-library"
+      ],
+      "file": "admin/src/style.css",
+      "line": 1297,
+      "conclusion": "false_positive",
+      "reason": "项目无 abc-button；gap 用于独立页面布局。",
+      "ruleIds": [
+        "RULE-UI-001",
+        "RULE-UI-002",
+        "RULE-UI-003",
+        "RULE-UI-004",
+        "RULE-UI-005",
+        "RULE-UI-006",
+        "RULE-UI-007",
+        "RULE-UI-008",
+        "RULE-UI-009"
+      ]
+    },
+    {
+      "detector": "inline-style",
+      "categories": [
+        "styling"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 193,
+      "conclusion": "false_positive",
+      "reason": "动态计算签名占比宽度，符合规则中动态计算样式例外。",
+      "ruleIds": [
+        "RULE-STYLE-001",
+        "RULE-STYLE-002",
+        "RULE-STYLE-003",
+        "RULE-STYLE-004",
+        "RULE-STYLE-005",
+        "RULE-STYLE-006",
+        "RULE-STYLE-007"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 26,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 70,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 73,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 74,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 111,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/api.js",
+      "line": 2,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/api.js",
+      "line": 9,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/api.js",
+      "line": 14,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/api.js",
+      "line": 17,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/api.js",
+      "line": 24,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/api.js",
+      "line": 33,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/api.js",
+      "line": 39,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/api.js",
+      "line": 43,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/api.js",
+      "line": 49,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/components/InitialPassword.vue",
+      "line": 5,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/components/InitialPassword.vue",
+      "line": 6,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/components/InitialPassword.vue",
+      "line": 7,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/components/InitialPassword.vue",
+      "line": 8,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/components/InitialPassword.vue",
+      "line": 9,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/components/InitialPassword.vue",
+      "line": 10,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/components/Modal.vue",
+      "line": 4,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/components/Modal.vue",
+      "line": 5,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/components/Modal.vue",
+      "line": 6,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/components/Pagination.vue",
+      "line": 4,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/components/Pagination.vue",
+      "line": 10,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/components/Pagination.vue",
+      "line": 11,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/pages/Audits.vue",
+      "line": 6,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/pages/Audits.vue",
+      "line": 10,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/pages/Audits.vue",
+      "line": 11,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/pages/Devices.vue",
+      "line": 14,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/pages/Devices.vue",
+      "line": 16,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/pages/Devices.vue",
+      "line": 39,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/pages/Devices.vue",
+      "line": 46,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/pages/Devices.vue",
+      "line": 67,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 7,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 9,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 10,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 21,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 13,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 15,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 32,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 34,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 36,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 43,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 44,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 47,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 6,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 12,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 6,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 8,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 15,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 34,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "naming-constant",
+      "categories": [
+        "naming"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 81,
+      "conclusion": "false_positive",
+      "reason": "命中为普通局部绑定、响应式变量和函数返回值，无须全部使用大写常量命名。",
+      "ruleIds": [
+        "RULE-NAMING-001",
+        "RULE-NAMING-002",
+        "RULE-NAMING-003",
+        "RULE-NAMING-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 2,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 3,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 17,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 18,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 19,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 20,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 21,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 22,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 23,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 24,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/App.vue",
+      "line": 25,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/api.js",
+      "line": 1,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/components/InitialPassword.vue",
+      "line": 2,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/components/InitialPassword.vue",
+      "line": 3,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/components/InitialPassword.vue",
+      "line": 4,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/components/Modal.vue",
+      "line": 2,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/components/Modal.vue",
+      "line": 3,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/components/Pagination.vue",
+      "line": 2,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/components/Pagination.vue",
+      "line": 3,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/main.js",
+      "line": 1,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/main.js",
+      "line": 2,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/main.js",
+      "line": 3,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/pages/Audits.vue",
+      "line": 2,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/pages/Audits.vue",
+      "line": 3,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/pages/Audits.vue",
+      "line": 4,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/pages/Audits.vue",
+      "line": 5,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/pages/Devices.vue",
+      "line": 2,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/pages/Devices.vue",
+      "line": 3,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/pages/Devices.vue",
+      "line": 12,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/pages/Devices.vue",
+      "line": 13,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 2,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 3,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 4,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 5,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/pages/Messages.vue",
+      "line": 6,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 2,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 3,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/pages/Overview.vue",
+      "line": 12,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 2,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 3,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 4,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/pages/Settings.vue",
+      "line": 5,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 2,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 3,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 4,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    },
+    {
+      "detector": "quality-commented-code",
+      "categories": [
+        "quality"
+      ],
+      "file": "admin/src/pages/Tokens.vue",
+      "line": 5,
+      "conclusion": "false_positive",
+      "reason": "按仓库上下文核对：ABC 特定样式/命名约束不适用，未发现影响行为或安全的缺陷。",
+      "ruleIds": [
+        "RULE-QUALITY-001",
+        "RULE-QUALITY-002",
+        "RULE-QUALITY-003",
+        "RULE-QUALITY-004"
+      ]
+    }
+  ],
+  "invalidPatterns": [
+    {
+      "detector": "hardcoded-color",
+      "pattern": "rgb\\\\("
+    },
+    {
+      "detector": "hardcoded-color",
+      "pattern": "rgba\\\\("
+    },
+    {
+      "detector": "hardcoded-color",
+      "pattern": "rgb\\\\("
+    },
+    {
+      "detector": "hardcoded-color",
+      "pattern": "rgba\\\\("
+    },
+    {
+      "detector": "hardcoded-color",
+      "pattern": "rgb\\\\("
+    },
+    {
+      "detector": "hardcoded-color",
+      "pattern": "rgba\\\\("
+    },
+    {
+      "detector": "hardcoded-color",
+      "pattern": "rgb\\\\("
+    },
+    {
+      "detector": "hardcoded-color",
+      "pattern": "rgba\\\\("
+    },
+    {
+      "detector": "hardcoded-color",
+      "pattern": "rgb\\\\("
+    },
+    {
+      "detector": "hardcoded-color",
+      "pattern": "rgba\\\\("
+    },
+    {
+      "detector": "hardcoded-color",
+      "pattern": "rgb\\\\("
+    },
+    {
+      "detector": "hardcoded-color",
+      "pattern": "rgba\\\\("
+    },
+    {
+      "detector": "hardcoded-color",
+      "pattern": "rgb\\\\("
+    },
+    {
+      "detector": "hardcoded-color",
+      "pattern": "rgba\\\\("
+    },
+    {
+      "detector": "hardcoded-color",
+      "pattern": "rgb\\\\("
+    },
+    {
+      "detector": "hardcoded-color",
+      "pattern": "rgba\\\\("
+    },
+    {
+      "detector": "hardcoded-color",
+      "pattern": "rgb\\\\("
+    },
+    {
+      "detector": "hardcoded-color",
+      "pattern": "rgba\\\\("
+    },
+    {
+      "detector": "hardcoded-color",
+      "pattern": "rgb\\\\("
+    },
+    {
+      "detector": "hardcoded-color",
+      "pattern": "rgba\\\\("
+    },
+    {
+      "detector": "hardcoded-color",
+      "pattern": "rgb\\\\("
+    },
+    {
+      "detector": "hardcoded-color",
+      "pattern": "rgba\\\\("
+    },
+    {
+      "detector": "api-direct-axios",
+      "pattern": "axios\\\\("
+    },
+    {
+      "detector": "api-direct-axios",
+      "pattern": "axios\\\\("
+    },
+    {
+      "detector": "api-direct-axios",
+      "pattern": "axios\\\\("
+    },
+    {
+      "detector": "api-direct-axios",
+      "pattern": "axios\\\\("
+    },
+    {
+      "detector": "api-direct-axios",
+      "pattern": "axios\\\\("
+    },
+    {
+      "detector": "api-direct-axios",
+      "pattern": "axios\\\\("
+    },
+    {
+      "detector": "api-direct-axios",
+      "pattern": "axios\\\\("
+    },
+    {
+      "detector": "api-direct-axios",
+      "pattern": "axios\\\\("
+    },
+    {
+      "detector": "api-direct-axios",
+      "pattern": "axios\\\\("
+    },
+    {
+      "detector": "api-direct-axios",
+      "pattern": "axios\\\\("
+    },
+    {
+      "detector": "api-direct-axios",
+      "pattern": "axios\\\\("
+    },
+    {
+      "detector": "api-direct-axios",
+      "pattern": "axios\\\\("
+    }
+  ],
+  "missingRules": [
+    "rules/ui-library/RULE-UI-003.md",
+    "rules/ui-library/RULE-UI-004.md",
+    "rules/ui-library/RULE-UI-005.md",
+    "rules/ui-library/RULE-UI-006.md",
+    "rules/ui-library/RULE-UI-007.md",
+    "rules/styling/RULE-STYLE-002.md",
+    "rules/styling/RULE-STYLE-003.md",
+    "rules/styling/RULE-STYLE-004.md",
+    "rules/styling/RULE-STYLE-005.md",
+    "rules/naming/RULE-NAMING-001.md",
+    "rules/naming/RULE-NAMING-002.md",
+    "rules/naming/RULE-NAMING-003.md",
+    "rules/naming/RULE-NAMING-004.md",
+    "rules/naming/RULE-NAMING-005.md",
+    "rules/quality/RULE-QUALITY-001.md",
+    "rules/quality/RULE-QUALITY-002.md",
+    "rules/quality/RULE-QUALITY-003.md",
+    "rules/quality/RULE-QUALITY-004.md"
+  ],
+  "unconsumed": 0
+}
