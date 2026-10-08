@@ -68,6 +68,21 @@ class AppSettings(context: Context) {
     var lastError: String
         get() = prefs.getString("error", "") ?: ""
         set(value) { prefs.edit().putString("error", value).apply() }
+    var realtimeMode: Boolean
+        get() = prefs.getBoolean("realtimeMode", false)
+        set(value) { prefs.edit().putBoolean("realtimeMode", value).apply() }
+    var scanGapMillis: Long
+        get() = prefs.getLong("scanGapMillis", 0)
+        set(value) { prefs.edit().putLong("scanGapMillis", value).apply() }
+    var maxScanGapMillis: Long
+        get() = prefs.getLong("maxScanGapMillis", 0)
+        set(value) { prefs.edit().putLong("maxScanGapMillis", value).apply() }
+    var lastUploadAttempt: String
+        get() = prefs.getString("lastUploadAttempt", "尚无") ?: ""
+        set(value) {
+            val time = java.text.SimpleDateFormat("MM-dd HH:mm:ss", java.util.Locale.getDefault()).format(java.util.Date())
+            prefs.edit().putString("lastUploadAttempt", "$time  $value").apply()
+        }
     var inboxSince: Long
         get() = prefs.getLong("inboxSince", 0)
         set(value) { prefs.edit().putLong("inboxSince", value).apply() }

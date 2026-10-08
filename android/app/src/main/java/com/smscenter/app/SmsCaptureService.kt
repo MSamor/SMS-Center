@@ -14,10 +14,11 @@ import android.content.pm.ServiceInfo
 import android.os.Build
 import android.os.IBinder
 
-/** User-visible, continuous SMS reception; no polling, SMS-body notification or permanent wake lock. */
+/** User-visible capture service. Optional realtime mode keeps CPU awake with renewable leases. */
 class SmsCaptureService : Service() {
     private val smsReceiver = SmsReceiver("常驻服务")
     private var registered = false
+    private val wakeController by lazy { CaptureWakeController(this) }
     private val inboxMonitor by lazy { SmsInboxMonitor(this) }
     override fun onBind(intent: Intent?): IBinder? = null
     override fun onCreate() {
@@ -35,6 +36,8 @@ class SmsCaptureService : Service() {
         } catch (_: Exception) {
             AppSettings(this).lastError = "常驻短信接收器注册失败，请检查短信权限并重新开启采集"
         }
+        wakeController.start()
+        currentWakeController = wakeController
         inboxMonitor.start()
         running = true
     }
@@ -44,7 +47,7 @@ class SmsCaptureService : Service() {
         val builder = Notification.Builder(this, CHANNEL)
             .setSmallIcon(com.smscenter.app.R.drawable.ic_notification)
             .setContentTitle("短信中枢：后台采集中")
-            .setContentText("验证码短信收到后立即尝试上传；点击打开设置")
+            .setContentText(if (AppSettings(this).realtimeMode) "实时模式：保持 CPU 唤醒，耗电较高；点击设置" else "省电模式：息屏检查可能延迟；点击设置")
             .setContentIntent(open).setOngoing(true).setShowWhen(false)
             .setCategory(Notification.CATEGORY_SERVICE).setVisibility(Notification.VISIBILITY_PRIVATE)
             .addAction(Notification.Action.Builder(null, "停止采集", stop).build())
@@ -56,7 +59,8 @@ class SmsCaptureService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val settings = AppSettings(this)
         if (intent?.action == STOP) { settings.enabled = false; UploadWorker.stop(this) }
-        if (!settings.enabled) { stopForeground(STOP_FOREGROUND_REMOVE); stopSelf(); return START_NOT_STICKY }
+        if (!settings.enabled) { wakeController.stop(); stopForeground(STOP_FOREGROUND_REMOVE); stopSelf(); return START_NOT_STICKY }
+        wakeController.refresh()
         inboxMonitor.start()
         // Repost after permission changes or dismissal when the user reopens the App.
         showForegroundNotification()
@@ -64,12 +68,16 @@ class SmsCaptureService : Service() {
         return START_STICKY
     }
     override fun onDestroy() {
+        wakeController.stop()
+        currentWakeController = null
         inboxMonitor.stop()
         if (registered) { unregisterReceiver(smsReceiver); registered = false }
         receiverRegistered = false; running = false
         super.onDestroy()
     }
     companion object {
+        @Volatile private var currentWakeController: CaptureWakeController? = null
+        val cpuAwake: Boolean get() = currentWakeController?.held == true
         private const val CHANNEL = "sms-capture"
         private const val NOTIFICATION = 1001
         private const val STOP = "com.smscenter.app.STOP_CAPTURE"

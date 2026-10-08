@@ -68,9 +68,11 @@ object QueueUploader {
     fun upload(db: QueueDb, settings: AppSettings, token: String, item: QueueDb.Item, immediate: Boolean = false): Boolean {
         if (!settings.enabled) return true
         db.attempted(item.id)
+        settings.lastUploadAttempt = "开始${if (immediate) "立即" else "任务"}上传"
         try {
             val payload = SecureStore.decrypt(item.payload, item.id)
             val result = CenterApi.call(settings.server, token, "/api/v1/sms", payload, immediate)
+            settings.lastUploadAttempt = "收到 HTTP ${result.status}"
             when {
                 result.status in 200..299 -> { db.complete(item.id, "uploaded"); settings.lastError = "" }
                 result.status == 401 || result.status == 403 -> {
@@ -86,6 +88,7 @@ object QueueUploader {
                 else -> { settings.lastError = "服务地址或协议有误（${result.status}），请验证连接"; return false }
             }
         } catch (_: Exception) {
+            settings.lastUploadAttempt = "网络请求或解密失败"
             settings.lastError = "网络连接或本地解密失败，任务将自动重试"; return false
         }
         return true

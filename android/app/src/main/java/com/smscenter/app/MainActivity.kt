@@ -83,6 +83,9 @@ class MainActivity : Activity() {
         state.addView(text(if (settings.enabled) "采集已开启" else "等待接入设备", 20f, blue, true))
         state.addSpaced(text(if (settings.enabled) "验证码短信会加密入队并立即尝试上传，失败后自动重试。" else "先配置服务地址和上传 Token，再授权短信接收。", 12f, muted), 8)
         state.addSpaced(text("后台服务：${if (SmsCaptureService.running) "运行中" else "未运行"} · 常驻短信接收：${if (SmsCaptureService.receiverRegistered) "已注册" else "未注册"}", 11f, muted), 10)
+        state.addSpaced(text("实时模式：${if (settings.realtimeMode) "开启" else "关闭"} · CPU 唤醒锁：${if (SmsCaptureService.cpuAwake) "已申请（系统仍可能禁用）" else "未申请"}", 11f, muted), 6)
+        state.addSpaced(text("检查间隔：${settings.scanGapMillis / 1000} 秒 · 最长间隔：${settings.maxScanGapMillis / 1000} 秒", 11f, muted), 6)
+        state.addSpaced(text("最近上传请求：${settings.lastUploadAttempt}", 11f, muted), 6)
         state.addSpaced(text("短信库检查：${settings.lastInboxResult}", 11f, muted), 6)
         state.addSpaced(text("最近接收入口：${settings.lastBroadcastSource}", 11f, muted), 6)
         state.addSpaced(text("最近广播：${settings.lastReceiveResult}", 11f, muted), 10)
@@ -166,6 +169,23 @@ class MainActivity : Activity() {
                     else enableCollection()
                 }.show()
         }
+        val realtime = Switch(this).apply {
+            text = "持续实时采集（较高耗电）"; textSize = 13f; isChecked = settings.realtimeMode; setTextColor(ink)
+        }
+        permission.addSpaced(realtime, 12)
+        permission.addSpaced(text("开启后，采集期间保持 CPU 唤醒，让息屏时的短信库检查和上传继续执行。不会点亮屏幕，但会增加耗电，建议专用手机接电使用；关闭此模式或停止采集立即释放。系统厂商仍可能限制网络或冻结应用。", 11f, muted), 8)
+        realtime.setOnCheckedChangeListener { _, checked ->
+            if (!checked) {
+                settings.realtimeMode = false; SmsCaptureService.start(this); toast("实时模式已关闭，息屏检查可能延迟")
+            } else {
+                realtime.isChecked = false
+                AlertDialog.Builder(this).setTitle("启用持续实时采集").setMessage("采集开启期间会保持 CPU 唤醒，增加耗电和发热。建议专用短信手机接电使用。可随时关闭，停止采集也会立即释放唤醒锁。")
+                    .setNegativeButton("取消", null).setPositiveButton("开启实时模式") { _, _ ->
+                        settings.realtimeMode = true; settings.maxScanGapMillis = 0
+                        SmsCaptureService.start(this); toast("实时模式已开启，请保留自启动和后台不受限制设置"); render()
+                    }.show()
+            }
+        }
         val smsGranted = checkSelfPermission(Manifest.permission.RECEIVE_SMS) == PackageManager.PERMISSION_GRANTED
         permission.addSpaced(text("短信接收权限：${if (smsGranted) "已授权" else "未授权"}", 12f, if (smsGranted) Color.rgb(47, 158, 123) else muted), 14)
         permission.addSpaced(text("后台采集服务：${if (SmsCaptureService.running) "运行中（常驻通知）" else "未运行"}", 12f, muted), 10)
@@ -178,6 +198,19 @@ class MainActivity : Activity() {
         if (Build.MANUFACTURER.lowercase(Locale.ROOT) in listOf("xiaomi", "redmi", "poco")) {
             permission.addSpaced(text("小米 / Redmi / POCO 还需在「其他权限」中将「通知类短信」设为「始终允许」。普通短信权限已授权，也可能读不到验证码短信；此额外权限需在系统页面确认。", 11f, muted), 12)
             permission.addSpaced(button("设置小米通知类短信权限") { openVendorSmsPermissions() }, 11)
+            val noRestrict = runCatching { Settings.System.getString(contentResolver, "MILLET_NO_RESTRICT_APP") }.getOrNull()
+            val entries = noRestrict?.split(',')
+            val vendorState = when {
+                entries == null -> "无法读取，请在系统设置确认"
+                entries.any { it == packageName } -> "名单中有本应用（仍需实测后台行为）"
+                entries.any { it.trim() == packageName } -> "名单包名含多余空格，可能未生效"
+                else -> "未找到本应用，请设为不限制"
+            }
+            permission.addSpaced(text("小米应用省电策略：$vendorState", 11f, muted), 10)
+            permission.addSpaced(button("检查小米应用省电策略") {
+                toast("请检查应用省电策略 / 应用智能省电为不限制；这与 Android 电池优化白名单不同")
+                open(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName")))
+            }, 11)
         }
         val exempt = (getSystemService(POWER_SERVICE) as PowerManager).isIgnoringBatteryOptimizations(packageName)
         permission.addSpaced(text("后台电池限制：${if (exempt) "已允许不受限制" else "可能限制后台执行"}", 12f, muted), 17)

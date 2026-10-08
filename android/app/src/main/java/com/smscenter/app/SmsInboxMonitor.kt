@@ -20,6 +20,7 @@ class SmsInboxMonitor(context: Context) {
     @Volatile private var stopped = false
     private var registered = false
     private var started = false
+    private var lastScanElapsed = 0L
     private val observer = object : ContentObserver(Handler(Looper.getMainLooper())) {
         override fun onChange(selfChange: Boolean) { requestScan() }
     }
@@ -45,6 +46,14 @@ class SmsInboxMonitor(context: Context) {
     }
     private fun scan() {
         if (stopped || !settings.enabled) return
+        val now = android.os.SystemClock.elapsedRealtime()
+        if (lastScanElapsed > 0) {
+            val gap = now - lastScanElapsed
+            settings.scanGapMillis = gap
+            settings.maxScanGapMillis = maxOf(gap, settings.maxScanGapMillis)
+        }
+        lastScanElapsed = now
+        settings.lastInboxResult = "开始读取检查"
         try {
             QueueDb(context).use { db ->
                 if (settings.inboxSince == 0L) {
