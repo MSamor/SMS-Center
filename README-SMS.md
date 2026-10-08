@@ -145,7 +145,7 @@ ADMIN_PASSWORD=自行填写至少12字符的初始密码
 
 ### 获取 APK
 
-可以在自己的 GitHub 仓库 **Actions → Build and Test → 已成功运行的工作流 → Artifacts** 中下载 `sms-center-android-debug-<运行编号>`，解压后安装 `app-debug.apk`。自动构建说明见 [GitHub Actions](#github-actions-自动构建)。
+正式版本在仓库 **Releases → 对应版本 → Assets** 下载 `sms-center-vX.Y.Z.apk`，同时提供 `SHA256SUMS.txt`。发布前尚无版本时，可从 **Actions → Build and Test → Artifacts** 下载 Debug 测试包。自动发布说明见 [GitHub Actions](#github-actions-自动构建)。
 
 也可以自行构建。需要 JDK 17（或兼容的 JDK 21）、Android SDK、Platform 35 和 Build Tools 35.0.0：
 
@@ -167,7 +167,7 @@ ADB 安装到测试设备：
 adb install -r -g android/app/build/outputs/apk/debug/app-debug.apk
 ```
 
-APK 最低支持 Android 8.0（API 26）。当前自动构建为 Debug 签名，用于测试和内部联调；CI 不依赖签名 Secrets。正式发布需要维护者自己的持久签名密钥。不同 CI 运行的临时 Debug 密钥可能不同，覆盖安装出现签名不一致时，需要卸载旧测试版本；卸载会移除 App 本地配置与队列。
+APK 最低支持 Android 8.0（API 26）。日常 CI 使用 Debug 签名；版本发布使用维护者在 Secrets 中配置的固定签名。后续更新必须保留同一发布密钥。Debug 测试包与 Release 包可能签名不同，首次切换需卸载旧测试包；卸载会移除 App 本地配置与队列。
 
 ### 接入步骤
 
@@ -320,33 +320,103 @@ cd android
 
 ## GitHub Actions 自动构建
 
-仓库已经提供 [.github/workflows/ci.yml](.github/workflows/ci.yml)，推送到 GitHub 后可使用；本地创建配置不会自动触发远程运行。
+仓库包含日常检查和版本发布两个工作流：
 
-触发方式：
+| 工作流                                           | 触发                                  | 用途                                                     |
+| ------------------------------------------------ | ------------------------------------- | -------------------------------------------------------- |
+| [Build and Test](.github/workflows/ci.yml)       | 分支推送、PR、手动运行                | Debug APK、Android Lint、Node 测试、Vue 构建与浏览器联调 |
+| [Publish Release](.github/workflows/release.yml) | `v*` 标签推送，或手动指定已存在的标签 | 签名 APK、Docker Hub 镜像、GitHub Release 与发布说明     |
 
-- `push`：分支或标签推送。
-- `pull_request`：合并请求验证。
-- `workflow_dispatch`：在 Actions 页手动点击 Run workflow。
+### 配置发布凭证
 
-两个独立任务：
+在 **Settings → Secrets and variables → Actions → Secrets** 配置：
 
-| 任务         | 步骤                                                             | 产物                                     |
-| ------------ | ---------------------------------------------------------------- | ---------------------------------------- |
-| Android APK  | JDK 17、Android SDK 35、Gradle Wrapper、assembleDebug、lintDebug | Debug APK、Lint 报告                     |
-| Node and Vue | Node 24、npm ci、格式检查、API 测试、Vue 构建、浏览器测试        | server/public 静态页面，失败时浏览器报告 |
+| Secret                      | 内容                                |
+| --------------------------- | ----------------------------------- |
+| `ANDROID_KEYSTORE_BASE64`   | 固定发布密钥库的 Base64 内容        |
+| `ANDROID_KEYSTORE_PASSWORD` | 密钥库密码                          |
+| `ANDROID_KEY_ALIAS`         | 签名别名                            |
+| `ANDROID_KEY_PASSWORD`      | 签名密钥密码                        |
+| `DOCKERHUB_USERNAME`        | Docker Hub 用户名                   |
+| `DOCKERHUB_TOKEN`           | 拥有目标仓库 Write 权限的访问 Token |
 
-第三方 Actions 固定到 commit SHA；工作流只授予 `contents: read`，不需要 APK 签名 Secrets，也不需要真实管理员、服务端密钥或业务 Token。依赖使用公开 npm 仓库。
+在同页面 **Variables** 配置 `DOCKERHUB_IMAGE`，例如 `yourname/sms-center`，使用小写，不包含 `docker.io/`、标签或 digest。提前创建 Docker Hub 仓库，需要公开下载时设置为 Public。凭证不会写入源码，APK 密钥在 runner 临时目录恢复，任务结束时清理。
 
-下载 APK：
+GitHub Release 使用内置 `GITHUB_TOKEN`，无需另建 GitHub PAT；只有发布任务授予 `contents: write`。日常 CI/PR 不读取发布 Secrets。第三方 Actions 固定到 commit SHA。
 
-1. 打开仓库的 Actions。
-2. 选择成功完成的 Build and Test 运行。
-3. 在 Artifacts 下载 `sms-center-android-debug-<运行编号>`。
-4. 解压取得 `app-debug.apk`。
+### 发布版本
 
-产物默认保留 14 天。工作流目前不自动创建 GitHub Release，不构建正式签名 APK；下载的静态页面产物也不包含 Node 依赖和数据库，不能单独作为完整后端部署包。
+先提交并推送代码及工作流，再对该提交创建标签：
+
+```bash
+git tag -a v1.0.0 -m "SMS Center v1.0.0"
+git push origin v1.0.0
+```
+
+也可在 **Actions → Publish Release → Run workflow** 输入已推送的标签。所有发布构建使用标签指向的同一个 commit。
+
+支持 `v1.2.3` 正式版本及 `v1.2.3-alpha.1`、`v1.2.3-beta.1`、`v1.2.3-rc.1` 预发布。当前映射支持 major 0～199、minor/patch 0～99、预发布序号 1～199，不支持其他后缀或 build metadata。APK `versionName` 为去掉 v 的版本；`versionCode` 使用以下确定性映射：
+
+```text
+major × 10000000 + minor × 100000 + patch × 1000 + 阶段序号
+alpha.N = N；beta.N = 200 + N；rc.N = 400 + N；正式版 = 999
+```
+
+同一版本重跑编号保持不变，正式版编号高于同版本预发布，后续版本编号递增。
+
+发布顺序：
+
+1. 校验标签、镜像名和所有凭证是否存在；已公开的 Release 禁止覆盖，修改后发布新版本。
+2. 运行格式检查、服务端和发布脚本测试、Vue 构建、浏览器联调。
+3. 使用固定签名构建并检查 APK，生成 SHA256 校验文件。
+4. 使用 Dockerfile 构建完整 Vue + Node 镜像，在 amd64 上检查页面和数据库健康，再推送 amd64/arm64 多架构镜像。
+5. 生成 Release 说明，创建或更新草稿，上传 APK、校验文件和发布用 Compose。
+6. 正式版将镜像 digest 标记为 latest；预发布不更新 latest。最后公开 Release。
+
+### 下载与发布说明
+
+Release 的 Assets 包含：
+
+- `sms-center-vX.Y.Z.apk`：固定签名的 Android Release APK。
+- `SHA256SUMS.txt`：APK 和 Compose 附件校验值。
+- `compose.release.yaml`：直接拉取镜像的部署配置。
+
+说明自动组合 GitHub 变更记录和安装指南，列出 APK 版本、镜像标签/digest、首次改密、设备接入、数据备份和升级注意事项。文档链接固定到对应版本标签。
+
+镜像标签为 `DOCKERHUB_IMAGE:X.Y.Z`（不含 v）。正式版同时更新 `latest`，含义为最近一次成功发布的正式版本；生产环境推荐固定版本或 digest，不依赖 latest。请按版本递增顺序发布，避免后发布旧版本将 latest 指向旧版本。
+
+日常 CI 的 Debug APK 与报告仍在 Artifacts 下载，默认保留 14 天。Release 附件由发布流程上传，不使用这项 14 天自动过期设置。静态页面 Artifact 不是完整后台部署包。
+
+### 失败重跑
+
+公开 Release 前失败，可以重跑同一标签：草稿和附件会更新，已推送的版本镜像可能重新构建。已公开版本不能通过该工作流覆盖；使用新标签发布修复版本。Docker Hub 推送、latest 更新与 GitHub Release 不是原子事务，失败时可能留下版本镜像或草稿，需查看 Actions 日志确认状态。
+
+本地检查不能证明远端 Secrets 有效；首次发布必须在 GitHub 实际运行后确认 APK 附件与 Docker Hub 镜像都可下载。
 
 ## Docker 与 HTTPS 部署
+
+### 使用发布镜像（推荐）
+
+从 Release 下载 `compose.release.yaml` 保存为部署目录中的 `compose.yaml`，或者从源码复制该文件。创建 `.env`：
+
+```dotenv
+SMS_CENTER_IMAGE=yourname/sms-center:1.0.0
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=
+ADMIN_ORIGINS=https://sms.example.com
+```
+
+镜像名和版本使用 Release 说明中的实际值，域名替换为自己的 HTTPS 域名：
+
+```bash
+docker compose pull
+docker compose up -d
+docker compose logs sms-center
+```
+
+此方式不需要在部署服务器安装 Node、Android SDK 或构建 Vue。
+
+### 从源码构建镜像
 
 镜像使用相同构建脚本，Vue 产物放入 `server/public`，运行层只启动 Node。
 
@@ -442,7 +512,7 @@ Android 和厂商省电策略会影响调度。允许自启动、后台运行并
 
 ```text
 SMS-Center/
-├── .github/workflows/ci.yml    # APK 与 Node/Vue CI
+├── .github/workflows/         # 日常 CI 与签名 APK / Docker Hub / Release 发布
 ├── android/                   # 原生 Android App 与 Gradle Wrapper
 ├── admin/                     # Vue 源码；dist 为构建输出
 ├── server/
@@ -451,13 +521,14 @@ SMS-Center/
 │   ├── public/                # 构建脚本生成，Node 直接托管
 │   ├── data/                  # 数据库和密钥，不提交 Git
 │   └── .env.example           # 服务配置示例
-├── scripts/build.js           # Vue 构建 → Node 静态目录
+├── scripts/                   # 页面构建、发布版本处理、Release 说明与测试
 ├── e2e/                       # 浏览器联调
 ├── docs/                      # API 与验证记录
 ├── Dockerfile
-└── compose.yaml
+├── compose.yaml               # 从源码构建
+└── compose.release.yaml       # 直接拉取发布镜像
 ```
 
-当前未实现：管理员多角色分配、密码找回、密钥轮换、自动备份、分布式多实例、APK 自动更新、正式签名发布和应用商店审核。Android 13+ 侧载权限、各厂商自启动入口和长时间后台行为仍需目标真机验证。
+当前未实现：管理员多角色分配、密码找回、密钥轮换、自动备份、分布式多实例、APK 自动更新、应用商店审核。Android 13+ 侧载权限、各厂商自启动入口和长时间后台行为仍需目标真机验证。
 
 贡献时请避免提交 `.env`、数据文件、密钥、签名文件和业务 Token；提交变更前运行 `npm run check` 与相关联调。开源许可证由维护者在仓库的 `LICENSE` 中声明；当前代码尚未附加许可证文件。

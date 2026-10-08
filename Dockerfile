@@ -1,5 +1,16 @@
+FROM node:24-bookworm-slim AS dependencies
+WORKDIR /app
+RUN apt-get update && apt-get install -y --no-install-recommends python3 make g++ ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+COPY package.json package-lock.json ./
+COPY server/package.json server/package.json
+COPY admin/package.json admin/package.json
+RUN npm ci --omit=dev && npm cache clean --force
+
 FROM node:24-bookworm-slim AS build
 WORKDIR /app
+RUN apt-get update && apt-get install -y --no-install-recommends python3 make g++ ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
 COPY package.json package-lock.json ./
 COPY server/package.json server/package.json
 COPY admin/package.json admin/package.json
@@ -14,7 +25,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 COPY server/package.json server/package.json
 COPY admin/package.json admin/package.json
-RUN npm ci --omit=dev && npm cache clean --force
+COPY --from=dependencies /app/node_modules node_modules
 COPY server/src server/src
 COPY --from=build /app/server/public server/public
 RUN mkdir -p /app/server/data && chown -R node:node /app

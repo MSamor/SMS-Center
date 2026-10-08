@@ -51,3 +51,13 @@ ANDROID_HOME=/path/to/android/sdk ANDROID_SERIAL=emulator-5554 python3 scripts/a
 - 重启保留账号和改密状态，初始环境变量不覆盖已存在的账号。
 - v1 数据库迁移保留原密码，要求一次改密。
 - GitHub Actions 配置提供 APK、Node/Vue 测试与静态资源产物；本地可验证 YAML 和构建，但远程工作流尚未在 GitHub 运行。
+
+## 2026-10-08 发布流程验证
+
+- `npm test`：16 项服务端测试和 3 项发布脚本测试通过。覆盖正式/预发布版本编号排序、非法标签与镜像名拒绝、Release 说明内容。
+- `npm run test:e2e`：完整页面构建与浏览器业务联调通过。
+- 使用独立临时测试密钥构建 `assembleRelease` 和执行 `lintRelease`，构建成功、APK 签名校验通过。验证 APK 显示 `versionName=1.0.0-rc.1`、`versionCode=10000401`。测试密钥已删除，此 APK 不使用维护者正式发布签名。
+- 未配置发布签名时，`verifyReleaseSigning` 明确失败；日常 Debug 构建仍可无 Secrets 执行。
+- `ci.yml`、`release.yml` 通过 actionlint v1.7.12；发布用 Compose 配置通过解析。
+- 发布说明生成包含版本 APK、SHA256 校验、镜像版本/digest、Compose、初始化改密、升级备份和对应标签的文档链接。
+- 本机 Docker daemon 未运行，因此多架构镜像构建、容器健康检查、Docker Hub 凭证、镜像推送和 GitHub Release 发布仍待远程工作流实际运行确认。工作流内已设置推送前 amd64 容器健康和管理页面检查。

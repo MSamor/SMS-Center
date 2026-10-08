@@ -9,7 +9,7 @@
 ![Android](https://img.shields.io/badge/Android-8.0%2B-3DDC84?logo=android&logoColor=white)
 ![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white)
 
-[📖 完整使用指南](README-SMS.md) · [🔌 API 文档](docs/API.md) · [📦 APK 构建](https://github.com/MSamor/SMS-Center/actions/workflows/ci.yml) · [🐛 问题反馈](https://github.com/MSamor/SMS-Center/issues)
+[📖 完整使用指南](README-SMS.md) · [🔌 API 文档](docs/API.md) · [📦 下载 APK](https://github.com/MSamor/SMS-Center/releases) · [🐛 问题反馈](https://github.com/MSamor/SMS-Center/issues)
 
 </div>
 
@@ -25,7 +25,7 @@
 - 🔐 **加密存储**：AES-256-GCM 加密短信内容，超级管理员首次登录强制修改密码。
 - 🔑 **授权查询**：上传与查询 Token 独立，按短信签名和设备分配权限，获取最新有效验证码。
 - 🖥️ **管理中心**：数据概览、短信分类筛选、设备管理、凭证分配和接口审计。
-- ⚙️ **自动构建**：GitHub Actions 构建 APK，并检查 Node/Vue 测试与构建。
+- ⚙️ **自动发布**：GitHub Actions 检查代码，按版本标签发布签名 APK 和 Docker Hub 镜像。
 
 ## 🚀 快速开始
 
@@ -46,12 +46,12 @@ npm start
 
 ## 📱 连接手机
 
-1. 在 [GitHub Actions](https://github.com/MSamor/SMS-Center/actions/workflows/ci.yml) 成功运行的 **Artifacts** 中下载并解压 Debug APK。
+1. 在 [Releases](https://github.com/MSamor/SMS-Center/releases) 的 **Assets** 中下载版本 APK；日常测试包仍可从 Actions 的 Artifacts 获取。
 2. 在管理中心添加设备，保存生成的上传 Token。
 3. 在 App 中填写手机可访问的服务地址和 Token，授权短信接收并开启采集。
 4. 在管理中心分配查询 Token，通过 API 获取指定签名的验证码。
 
-安装、后台运行设置和接口示例见 [完整使用指南](README-SMS.md)。当前 APK 为 Debug 签名，正式发布需配置自己的签名密钥。
+安装、后台运行设置和接口示例见 [完整使用指南](README-SMS.md)。版本发布使用维护者配置的固定 Release 签名；首次发布前请完成 [发布配置](README-SMS.md#github-actions-自动构建)。
 
 ## 📚 文档
 

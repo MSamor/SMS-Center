@@ -18,3 +18,6 @@ playwright-report/
 test-results/
 server/public/
 server/.public-build-*/
+android/Secret/
+android/app/release/
+release-dist/

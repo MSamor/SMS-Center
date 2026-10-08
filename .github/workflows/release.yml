@@ -1,0 +1,324 @@
+name: Publish Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing version tag, e.g. v1.0.0 or v1.1.0-rc.1'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+# Serialize publishers; never cancel a run halfway through image/release publication.
+concurrency:
+  group: sms-center-release
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  prepare:
+    name: Validate release and credentials
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      tag: ${{ steps.version.outputs.tag }}
+      version: ${{ steps.version.outputs.version }}
+      versionCode: ${{ steps.version.outputs.versionCode }}
+      prerelease: ${{ steps.version.outputs.prerelease }}
+      apkName: ${{ steps.version.outputs.apkName }}
+      sha: ${{ steps.commit.outputs.sha }}
+    env:
+      RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+      DOCKERHUB_IMAGE: ${{ vars.DOCKERHUB_IMAGE }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          fetch-depth: 0
+      - name: Set up Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+      - name: Validate version and image name
+        id: version
+        run: node scripts/release-version.js
+      - name: Require configured release credentials
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          for key in ANDROID_KEYSTORE_BASE64 ANDROID_KEYSTORE_PASSWORD ANDROID_KEY_ALIAS ANDROID_KEY_PASSWORD DOCKERHUB_USERNAME DOCKERHUB_TOKEN; do
+            if [[ -z "${!key}" ]]; then
+              echo "::error::Missing repository secret: $key"
+              exit 1
+            fi
+          done
+      - name: Resolve existing tag and reject already published release
+        id: commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          sha=$(git rev-parse --verify "refs/tags/$RELEASE_TAG^{commit}")
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+          # Listing must succeed: do not mistake a permissions/network failure for no release.
+          gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/releases?per_page=100" > existing-releases.json
+          node --input-type=module - <<'JS'
+          import fs from 'node:fs';
+          const releases = JSON.parse(fs.readFileSync('existing-releases.json', 'utf8')).flat();
+          if (releases.some(r => r.tag_name === process.env.RELEASE_TAG && !r.draft)) {
+            throw new Error('This tag already has a published Release. Publish a new version instead of replacing installed builds.');
+          }
+          JS
+
+  verify:
+    name: Test Node and Vue
+    needs: prepare
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout tagged commit
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ needs.prepare.outputs.sha }}
+      - name: Set up Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm test
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - name: Upload browser failure reports
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: release-browser-failures
+          path: test-results/
+          if-no-files-found: ignore
+          retention-days: 14
+
+  android:
+    name: Build signed APK
+    needs: [prepare, verify]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SMS_RELEASE_VERSION: ${{ needs.prepare.outputs.version }}
+      SMS_RELEASE_VERSION_CODE: ${{ needs.prepare.outputs.versionCode }}
+      APK_NAME: ${{ needs.prepare.outputs.apkName }}
+      ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+      ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+      ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+    steps:
+      - name: Checkout tagged commit
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ needs.prepare.outputs.sha }}
+      - name: Set up JDK 17
+        uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@07d1f8453baaff67fb503883367f8b13e6158a54 # v6
+      - name: Install Android SDK packages
+        run: '"$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-35" "build-tools;35.0.0"'
+      - name: Restore signing key
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PATH: ${{ runner.temp }}/sms-center-release.jks
+        run: |
+          set -euo pipefail
+          echo "ANDROID_KEYSTORE_PATH=$ANDROID_KEYSTORE_PATH" >> "$GITHUB_ENV"
+          umask 077
+          printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$ANDROID_KEYSTORE_PATH"
+          test -s "$ANDROID_KEYSTORE_PATH"
+      - name: Build and lint signed Release APK
+        working-directory: android
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon :app:assembleRelease :app:lintRelease
+      - name: Verify APK signature and package assets
+        run: |
+          set -euo pipefail
+          "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose android/app/build/outputs/apk/release/app-release.apk
+          mkdir -p release-dist
+          cp android/app/build/outputs/apk/release/app-release.apk "release-dist/$APK_NAME"
+          cp compose.release.yaml release-dist/compose.release.yaml
+          cd release-dist
+          sha256sum "$APK_NAME" compose.release.yaml > SHA256SUMS.txt
+      - name: Upload release assets
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: signed-release-assets
+          path: release-dist/
+          if-no-files-found: error
+          retention-days: 14
+      - name: Remove restored key
+        if: always()
+        run: rm -f "$RUNNER_TEMP/sms-center-release.jks"
+      - name: Upload release lint reports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: release-android-lint
+          path: android/app/build/reports/lint-results-release.*
+          if-no-files-found: ignore
+          retention-days: 14
+
+  image:
+    name: Build and push Docker Hub image
+    needs: [prepare, verify, android]
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    outputs:
+      digest: ${{ steps.push.outputs.digest }}
+    env:
+      IMAGE: ${{ vars.DOCKERHUB_IMAGE }}
+      VERSION: ${{ needs.prepare.outputs.version }}
+    steps:
+      - name: Checkout tagged commit
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ needs.prepare.outputs.sha }}
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@c7c53464625b32c7a7e944ae62b3e17d2b600130 # v3
+      - name: Set up Buildx
+        uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
+      - name: Build and load host image for smoke test
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7
+        with:
+          context: .
+          platforms: linux/amd64
+          load: true
+          tags: sms-center:smoke
+          cache-from: type=gha,scope=release-image
+          cache-to: type=gha,mode=max,scope=release-image
+      - name: Smoke test packaged page, database and Node service
+        run: |
+          set -euo pipefail
+          docker run -d --name sms-center-smoke -p 127.0.0.1:3100:3000 \
+            -e ADMIN_ORIGINS=https://sms.example.com sms-center:smoke >/dev/null
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:3100/api/health >/dev/null; then break; fi
+            sleep 2
+          done
+          curl --fail --silent http://127.0.0.1:3100/api/health | grep -q '"status":"ok"'
+          curl --fail --silent http://127.0.0.1:3100/ | grep -q '<div id="app"></div>'
+      - name: Remove smoke test container
+        if: always()
+        run: docker rm -f sms-center-smoke >/dev/null 2>&1 || true
+      - name: Log in to Docker Hub
+        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push versioned multi-platform image
+        id: push
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ vars.DOCKERHUB_IMAGE }}:${{ needs.prepare.outputs.version }}
+          labels: |
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
+            org.opencontainers.image.version=${{ needs.prepare.outputs.version }}
+            org.opencontainers.image.revision=${{ needs.prepare.outputs.sha }}
+          cache-from: type=gha,scope=release-image
+          cache-to: type=gha,mode=max,scope=release-image
+
+  publish:
+    name: Publish GitHub Release
+    needs: [prepare, android, image]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      RELEASE_TAG: ${{ needs.prepare.outputs.tag }}
+      RELEASE_SHA: ${{ needs.prepare.outputs.sha }}
+      PRERELEASE: ${{ needs.prepare.outputs.prerelease }}
+      DOCKERHUB_IMAGE: ${{ vars.DOCKERHUB_IMAGE }}
+      IMAGE_DIGEST: ${{ needs.image.outputs.digest }}
+    steps:
+      - name: Checkout tagged commit
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ needs.prepare.outputs.sha }}
+      - name: Set up Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+      - name: Download signed assets
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
+        with:
+          name: signed-release-assets
+          path: release-dist
+      - name: Generate release documentation
+        env:
+          CHANGELOG_FILE: release-changes.json
+          RELEASE_NOTES_FILE: release-notes.md
+        run: |
+          set -euo pipefail
+          gh api "repos/$GITHUB_REPOSITORY/releases/generate-notes" \
+            -f tag_name="$RELEASE_TAG" -f target_commitish="$RELEASE_SHA" > "$CHANGELOG_FILE"
+          node scripts/release-notes.js
+      - name: Prepare draft and attach verified assets
+        run: |
+          set -euo pipefail
+          (cd release-dist && sha256sum -c SHA256SUMS.txt)
+          gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/releases?per_page=100" > releases.json
+          state=$(node --input-type=module - <<'JS'
+          import fs from 'node:fs';
+          const release = JSON.parse(fs.readFileSync('releases.json','utf8')).flat().find(r => r.tag_name === process.env.RELEASE_TAG);
+          console.log(release ? (release.draft ? 'draft' : 'published') : 'missing');
+          JS
+          )
+          if [[ "$state" == published ]]; then echo '::error::Release already published'; exit 1; fi
+          if [[ "$state" == missing ]]; then
+            options=(--draft --verify-tag --title "SMS Center $RELEASE_TAG" --notes-file release-notes.md)
+            if [[ "$PRERELEASE" == true ]]; then options+=(--prerelease); fi
+            gh release create "$RELEASE_TAG" "${options[@]}"
+          else
+            gh release edit "$RELEASE_TAG" --title "SMS Center $RELEASE_TAG" --notes-file release-notes.md --prerelease="$PRERELEASE"
+          fi
+          gh release upload "$RELEASE_TAG" release-dist/* --clobber
+      - name: Set up Buildx for stable latest promotion
+        if: needs.prepare.outputs.prerelease == 'false'
+        uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
+      - name: Log in to Docker Hub
+        if: needs.prepare.outputs.prerelease == 'false'
+        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Promote stable image to latest
+        if: needs.prepare.outputs.prerelease == 'false'
+        run: docker buildx imagetools create --tag "$DOCKERHUB_IMAGE:latest" "$DOCKERHUB_IMAGE@$IMAGE_DIGEST"
+      - name: Publish complete release
+        run: |
+          set -euo pipefail
+          options=(--draft=false --prerelease="$PRERELEASE")
+          if [[ "$PRERELEASE" == true ]]; then options+=(--latest=false); else options+=(--latest); fi
+          gh release edit "$RELEASE_TAG" "${options[@]}"
+          echo "### Published $RELEASE_TAG" >> "$GITHUB_STEP_SUMMARY"
+          echo "- APK: https://github.com/$GITHUB_REPOSITORY/releases/tag/$RELEASE_TAG" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Image: \`$DOCKERHUB_IMAGE@$IMAGE_DIGEST\`" >> "$GITHUB_STEP_SUMMARY"
