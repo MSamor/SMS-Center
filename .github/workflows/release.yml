@@ -27,7 +27,6 @@ jobs:
       version: ${{ steps.version.outputs.version }}
       versionCode: ${{ steps.version.outputs.versionCode }}
       prerelease: ${{ steps.version.outputs.prerelease }}
-      apkName: ${{ steps.version.outputs.apkName }}
       sha: ${{ steps.commit.outputs.sha }}
     env:
       RELEASE_TAG: ${{ github.ref_name }}
@@ -115,7 +114,6 @@ jobs:
     env:
       SMS_RELEASE_VERSION: ${{ needs.prepare.outputs.version }}
       SMS_RELEASE_VERSION_CODE: ${{ needs.prepare.outputs.versionCode }}
-      APK_NAME: ${{ needs.prepare.outputs.apkName }}
       ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
       ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
       ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
@@ -151,6 +149,9 @@ jobs:
       - name: Verify APK signature and package assets
         run: |
           set -euo pipefail
+          : "${SMS_RELEASE_VERSION:?Missing release version}"
+          # Derive locally: job outputs can be suppressed when a filename matches a secret alias.
+          APK_NAME="sms-center-v${SMS_RELEASE_VERSION}.apk"
           "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose android/app/build/outputs/apk/release/app-release.apk
           mkdir -p release-dist
           cp android/app/build/outputs/apk/release/app-release.apk "release-dist/$APK_NAME"

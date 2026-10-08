@@ -80,3 +80,28 @@ test('release notes contain reproducible APK, deployment, initialization and bac
   assert.ok(!pre.includes('example/sms-center:latest'));
   assert.throws(() => releaseNotes({ ...config, digest: 'bad' }));
 });
+
+test('APK packaging derives filename locally instead of using secret-filtered job outputs', async () => {
+  const { readFileSync } = await import('node:fs');
+  const { parse } = await import('yaml');
+  const { spawnSync } = await import('node:child_process');
+  const workflow = parse(readFileSync('.github/workflows/release.yml', 'utf8'));
+  assert.equal(workflow.jobs.prepare.outputs.apkName, undefined);
+  assert.equal(workflow.jobs.android.env.APK_NAME, undefined);
+  const step = workflow.jobs.android.steps.find(
+    (step) => step.name === 'Verify APK signature and package assets',
+  );
+  assert.ok(step.run.includes('APK_NAME="sms-center-v${SMS_RELEASE_VERSION}.apk"'));
+  const setup = step.run.split('"$ANDROID_HOME/build-tools/')[0];
+  const result = spawnSync('bash', ['-c', `${setup}\nprintf '%s' "$APK_NAME"`], {
+    env: { SMS_RELEASE_VERSION: '1.0.0', PATH: process.env.PATH },
+    encoding: 'utf8',
+  });
+  assert.equal(result.status, 0);
+  assert.equal(result.stdout, releaseVersion('v1.0.0').apkName);
+  const missing = spawnSync('bash', ['-c', setup], {
+    env: { PATH: process.env.PATH },
+    encoding: 'utf8',
+  });
+  assert.notEqual(missing.status, 0);
+});
