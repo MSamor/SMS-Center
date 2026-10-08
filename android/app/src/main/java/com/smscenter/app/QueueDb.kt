@@ -7,28 +7,62 @@ import android.database.sqlite.SQLiteOpenHelper
 import org.json.JSONObject
 import java.security.MessageDigest
 
-class QueueDb(context: Context) : SQLiteOpenHelper(context.applicationContext, "encrypted_queue.db", null, 1) {
+class QueueDb(context: Context) : SQLiteOpenHelper(context.applicationContext, "encrypted_queue.db", null, 2) {
     override fun onCreate(db: SQLiteDatabase) {
-        db.execSQL("CREATE TABLE queue (id TEXT PRIMARY KEY, signature TEXT NOT NULL, payload TEXT, received_at INTEGER NOT NULL, status TEXT NOT NULL DEFAULT 'pending', attempts INTEGER NOT NULL DEFAULT 0, error TEXT NOT NULL DEFAULT '')")
+        db.execSQL("CREATE TABLE queue (id TEXT PRIMARY KEY, signature TEXT NOT NULL, payload TEXT, received_at INTEGER NOT NULL, status TEXT NOT NULL DEFAULT 'pending', attempts INTEGER NOT NULL DEFAULT 0, error TEXT NOT NULL DEFAULT '', dedupe_key TEXT)")
         db.execSQL("CREATE INDEX queue_status ON queue(status,received_at)")
+        db.execSQL("CREATE INDEX queue_dedupe ON queue(dedupe_key,received_at)")
     }
-    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) = Unit
+    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+        if (oldVersion < 2) {
+            db.execSQL("ALTER TABLE queue ADD COLUMN dedupe_key TEXT")
+            db.execSQL("CREATE INDEX queue_dedupe ON queue(dedupe_key,received_at)")
+        }
+    }
     fun enqueue(sender: String, body: String, timestamp: Long, extraKeywords: String): Boolean {
+        // Server performs final extraction; phone only screens candidates.
+        if (!isCandidate(body, extraKeywords)) return false
         val normalized = java.text.Normalizer.normalize(body, java.text.Normalizer.Form.NFKC)
-        val lower = normalized.lowercase(java.util.Locale.ROOT)
-        val keywords = listOf("验证码", "校验码", "动态码", "动态密码", "短信密码", "验证代码", "一次性密码", "verification code", "security code", "one-time password", "one time password", "one-time code", "passcode", "otp", "code") + extraKeywords.split(',', '，', '\n').map { it.trim().lowercase(java.util.Locale.ROOT) }.filter { it.isNotEmpty() }
-        // Server performs final extraction; phone only screens candidates to allow custom lengths/alphanumeric codes.
-        if (keywords.none { lower.contains(it) } || !Regex("[0-9]").containsMatchIn(normalized)) return false
-        val id = MessageDigest.getInstance("SHA-256").digest("$sender\u0000$timestamp\u0000$body".toByteArray()).joinToString("") { "%02x".format(it) }
+        val id = messageId(sender, body, timestamp)
         val signature = Regex("【([^【】\\r\\n]{1,64})】|\\[([^\\[\\]\\r\\n]{1,64})\\]").find(normalized)?.let { it.groupValues[1].ifEmpty { it.groupValues[2] }.trim() } ?: sender
         val payload = JSONObject().put("clientMessageId", id).put("sender", sender.take(64)).put("body", body.take(4096)).put("receivedAt", timestamp).toString()
-        val values = ContentValues().apply { put("id", id); put("signature", signature); put("payload", SecureStore.encrypt(payload, id)); put("received_at", timestamp) }
-        return writableDatabase.insertWithOnConflict("queue", null, values, SQLiteDatabase.CONFLICT_IGNORE) != -1L
+        val fingerprint = SecureStore.fingerprint("$sender\u0000$body")
+        val values = ContentValues().apply {
+            put("id", id); put("signature", signature); put("payload", SecureStore.encrypt(payload, id))
+            put("received_at", timestamp); put("dedupe_key", fingerprint)
+        }
+        val db = writableDatabase
+        db.beginTransaction()
+        try {
+            // Broadcast uses the sender's timestamp; provider uses local receipt time.
+            // Same sender+body within 5 seconds is one delivery, across either entry point.
+            val duplicate = db.rawQuery("SELECT 1 FROM queue WHERE id=? OR (dedupe_key=? AND received_at BETWEEN ? AND ?) LIMIT 1",
+                arrayOf(id, fingerprint, (timestamp - 5000).toString(), (timestamp + 5000).toString())).use { it.moveToFirst() }
+            if (duplicate) return false
+            val added = db.insertWithOnConflict("queue", null, values, SQLiteDatabase.CONFLICT_IGNORE) != -1L
+            db.setTransactionSuccessful()
+            return added
+        } finally { db.endTransaction() }
+    }
+    companion object {
+        fun messageId(sender: String, body: String, timestamp: Long): String =
+            MessageDigest.getInstance("SHA-256").digest("$sender\u0000$timestamp\u0000$body".toByteArray())
+                .joinToString("") { "%02x".format(it) }
+
+        fun isCandidate(body: String, extraKeywords: String): Boolean {
+            val normalized = java.text.Normalizer.normalize(body, java.text.Normalizer.Form.NFKC)
+            val lower = normalized.lowercase(java.util.Locale.ROOT)
+            val keywords = listOf("验证码", "校验码", "动态码", "动态密码", "短信密码", "验证代码", "一次性密码", "verification code", "security code", "one-time password", "one time password", "one-time code", "passcode", "otp", "code") + extraKeywords.split(',', '，', '\n').map { it.trim().lowercase(java.util.Locale.ROOT) }.filter { it.isNotEmpty() }
+            return keywords.any { lower.contains(it) } && Regex("[0-9]").containsMatchIn(normalized)
+        }
     }
     data class Item(val id: String, val payload: String)
     fun pending(): List<Item> = readableDatabase.rawQuery("SELECT id,payload FROM queue WHERE status='pending' ORDER BY received_at LIMIT 50", null).use { cursor ->
         buildList { while (cursor.moveToNext()) add(Item(cursor.getString(0), cursor.getString(1))) }
     }
+    fun pendingItem(id: String): Item? = readableDatabase.rawQuery(
+        "SELECT id,payload FROM queue WHERE id=? AND status='pending'", arrayOf(id)
+    ).use { c -> if (c.moveToFirst()) Item(c.getString(0), c.getString(1)) else null }
     fun complete(id: String, status: String, error: String = "") {
         writableDatabase.update("queue", ContentValues().apply { put("status", status); putNull("payload"); put("error", error.take(200)) }, "id=?", arrayOf(id))
     }
@@ -37,6 +71,9 @@ class QueueDb(context: Context) : SQLiteOpenHelper(context.applicationContext, "
     fun stats(): Stats = readableDatabase.rawQuery("SELECT COUNT(*),SUM(status='uploaded'),SUM(status='pending'),SUM(status='rejected') FROM queue", null).use { c -> c.moveToFirst(); Stats(c.getInt(0), c.getInt(1), c.getInt(2), c.getInt(3)) }
     data class Recent(val signature: String, val time: Long, val status: String, val error: String)
     fun recent(): List<Recent> = readableDatabase.rawQuery("SELECT signature,received_at,status,error FROM queue ORDER BY received_at DESC LIMIT 12", null).use { c -> buildList { while (c.moveToNext()) add(Recent(c.getString(0), c.getLong(1), c.getString(2), c.getString(3))) } }
+    fun lastReceivedAt(): Long = readableDatabase.rawQuery("SELECT COALESCE(MAX(received_at),0) FROM queue", null).use {
+        it.moveToFirst(); it.getLong(0)
+    }
     fun cleanup() {
         // Expired payloads are removed locally; the UI reports the rejected metadata.
         val expired = System.currentTimeMillis() - 30L * 86400000L

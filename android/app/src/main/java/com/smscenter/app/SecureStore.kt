@@ -8,6 +8,7 @@ import java.security.KeyStore
 import javax.crypto.Cipher
 import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
+import javax.crypto.Mac
 import javax.crypto.spec.GCMParameterSpec
 
 class SecureStore {
@@ -20,6 +21,15 @@ class SecureStore {
                 init(KeyGenParameterSpec.Builder(ALIAS, KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT)
                     .setBlockModes(KeyProperties.BLOCK_MODE_GCM).setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE).build())
             }.generateKey()
+        }
+        @Synchronized fun fingerprint(value: String): String {
+            val alias = "sms_center_dedupe_v1"
+            val store = KeyStore.getInstance("AndroidKeyStore").apply { load(null) }
+            val key = (store.getKey(alias, null) as? SecretKey) ?: KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_HMAC_SHA256, "AndroidKeyStore").apply {
+                init(KeyGenParameterSpec.Builder(alias, KeyProperties.PURPOSE_SIGN).setDigests(KeyProperties.DIGEST_SHA256).build())
+            }.generateKey()
+            return Mac.getInstance("HmacSHA256").apply { init(key) }.doFinal(value.toByteArray(Charsets.UTF_8))
+                .joinToString("") { "%02x".format(it) }
         }
         fun encrypt(value: String, context: String): String {
             val cipher = Cipher.getInstance("AES/GCM/NoPadding").apply { init(Cipher.ENCRYPT_MODE, key()); updateAAD(context.toByteArray()) }
@@ -41,7 +51,11 @@ class AppSettings(context: Context) {
     private val prefs = context.getSharedPreferences("sms_center", Context.MODE_PRIVATE)
     var enabled: Boolean
         get() = prefs.getBoolean("enabled", false)
-        set(value) { prefs.edit().putBoolean("enabled", value).apply() }
+        set(value) {
+            val edit = prefs.edit().putBoolean("enabled", value)
+            if (value && !enabled) edit.putLong("inboxSince", System.currentTimeMillis()).putLong("inboxLastId", 0)
+            edit.apply()
+        }
     var server: String
         get() = prefs.getString("server", "") ?: ""
         set(value) { prefs.edit().putString("server", value).apply() }
@@ -54,6 +68,30 @@ class AppSettings(context: Context) {
     var lastError: String
         get() = prefs.getString("error", "") ?: ""
         set(value) { prefs.edit().putString("error", value).apply() }
+    var inboxSince: Long
+        get() = prefs.getLong("inboxSince", 0)
+        set(value) { prefs.edit().putLong("inboxSince", value).apply() }
+    var inboxLastId: Long
+        get() = prefs.getLong("inboxLastId", 0)
+        set(value) { prefs.edit().putLong("inboxLastId", value).apply() }
+    var lastInboxResult: String
+        get() = prefs.getString("lastInboxResult", "尚未检查") ?: ""
+        set(value) {
+            val time = java.text.SimpleDateFormat("MM-dd HH:mm:ss", java.util.Locale.getDefault()).format(java.util.Date())
+            prefs.edit().putString("lastInboxResult", "$time  $value").apply()
+        }
+    var lastBroadcastSource: String
+        get() = prefs.getString("lastBroadcastSource", "尚无") ?: ""
+        set(value) { prefs.edit().putString("lastBroadcastSource", value).apply() }
+    var lastReceiveResult: String
+        get() = prefs.getString("lastReceiveResult", "尚未收到短信广播") ?: ""
+        set(value) {
+            val time = java.text.SimpleDateFormat("MM-dd HH:mm:ss", java.util.Locale.getDefault()).format(java.util.Date())
+            prefs.edit().putString("lastReceiveResult", "$time  $value").apply()
+        }
+    var lastImportResult: String
+        get() = prefs.getString("lastImportResult", "") ?: ""
+        set(value) { prefs.edit().putString("lastImportResult", value).apply() }
     var deviceName: String
         get() = prefs.getString("deviceName", "尚未验证连接") ?: ""
         set(value) { prefs.edit().putString("deviceName", value).apply() }

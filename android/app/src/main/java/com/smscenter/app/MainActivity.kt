@@ -38,7 +38,7 @@ class MainActivity : Activity() {
     private val ink = Color.rgb(43, 62, 91)
     private fun dp(value: Int) = (value * resources.displayMetrics.density).toInt()
     override fun onCreate(savedInstanceState: Bundle?) { super.onCreate(savedInstanceState); settings = AppSettings(this); render() }
-    override fun onResume() { super.onResume(); if (::settings.isInitialized) render(); mainHandler.postDelayed(refresh, 5000) }
+    override fun onResume() { super.onResume(); if (::settings.isInitialized) { SmsCaptureService.start(this); render() }; mainHandler.postDelayed(refresh, 5000) }
     override fun onPause() { mainHandler.removeCallbacks(refresh); super.onPause() }
     private fun background(color: Int, radius: Int = 14): GradientDrawable = GradientDrawable().apply { setColor(color); cornerRadius = dp(radius).toFloat() }
     private fun text(value: String, size: Float = 14f, color: Int = ink, bold: Boolean = false) = TextView(this).apply {
@@ -81,7 +81,11 @@ class MainActivity : Activity() {
     private fun statistics() {
         val state = card(); state.background = background(Color.rgb(231, 240, 255))
         state.addView(text(if (settings.enabled) "采集已开启" else "等待接入设备", 20f, blue, true))
-        state.addSpaced(text(if (settings.enabled) "验证码短信会加密入队，网络可用时自动上传。" else "先配置服务地址和上传 Token，再授权短信接收。", 12f, muted), 8)
+        state.addSpaced(text(if (settings.enabled) "验证码短信会加密入队并立即尝试上传，失败后自动重试。" else "先配置服务地址和上传 Token，再授权短信接收。", 12f, muted), 8)
+        state.addSpaced(text("后台服务：${if (SmsCaptureService.running) "运行中" else "未运行"} · 常驻短信接收：${if (SmsCaptureService.receiverRegistered) "已注册" else "未注册"}", 11f, muted), 10)
+        state.addSpaced(text("短信库检查：${settings.lastInboxResult}", 11f, muted), 6)
+        state.addSpaced(text("最近接收入口：${settings.lastBroadcastSource}", 11f, muted), 6)
+        state.addSpaced(text("最近广播：${settings.lastReceiveResult}", 11f, muted), 10)
         if (!settings.enabled) state.addSpaced(button("前往设置") { tab = 1; render() }, 15)
         content.addView(state)
         val db = QueueDb(this)
@@ -153,23 +157,33 @@ class MainActivity : Activity() {
         val toggle = Switch(this).apply { text = "开启验证码短信采集"; textSize = 13f; isChecked = settings.enabled; setTextColor(ink) }
         permission.addSpaced(toggle, 16)
         toggle.setOnCheckedChangeListener { _, enabled ->
-            if (!enabled) { settings.enabled = false; UploadWorker.stop(this); toast("采集已关闭"); return@setOnCheckedChangeListener }
+            if (!enabled) { settings.enabled = false; SmsCaptureService.stop(this); UploadWorker.stop(this); toast("采集已关闭"); return@setOnCheckedChangeListener }
             toggle.isChecked = false
             if (settings.server.isBlank() || runCatching { settings.token }.getOrDefault("").isBlank()) { toast("请先保存服务地址和 Token"); return@setOnCheckedChangeListener }
-            AlertDialog.Builder(this).setTitle("授权验证码采集").setMessage("开启后，App 会接收此手机的新短信，筛选包含验证码关键词的短信，加密保存待上传内容并发送到你配置的服务中心。仅对你本人拥有或已获得授权的手机启用。\n\n可随时关闭采集；不会自动读取历史短信。")
+            AlertDialog.Builder(this).setTitle("授权验证码采集").setMessage("开启后，App 会接收此手机的新短信，筛选包含验证码关键词的短信，加密保存待上传内容并发送到你配置的服务中心。仅对你本人拥有或已获得授权的手机启用。\n\n开启后会显示后台采集常驻通知，可从通知或设置中停止采集；会监听并每 5 秒检查开启采集后的新增短信；不会自动扫描全部历史短信。")
                 .setNegativeButton("取消", null).setPositiveButton("同意并开启") { _, _ ->
-                    if (checkSelfPermission(Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED) requestPermissions(arrayOf(Manifest.permission.RECEIVE_SMS), 10)
+                    if (checkSelfPermission(Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED || checkSelfPermission(Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) requestPermissions(arrayOf(Manifest.permission.RECEIVE_SMS, Manifest.permission.READ_SMS), 10)
                     else enableCollection()
                 }.show()
         }
         val smsGranted = checkSelfPermission(Manifest.permission.RECEIVE_SMS) == PackageManager.PERMISSION_GRANTED
         permission.addSpaced(text("短信接收权限：${if (smsGranted) "已授权" else "未授权"}", 12f, if (smsGranted) Color.rgb(47, 158, 123) else muted), 14)
+        permission.addSpaced(text("后台采集服务：${if (SmsCaptureService.running) "运行中（常驻通知）" else "未运行"}", 12f, muted), 10)
+        if (Build.VERSION.SDK_INT >= 33 && checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            permission.addSpaced(button("允许后台采集通知") { requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), 12) }, 11)
+        }
         permission.addSpaced(button("打开应用权限设置") { open(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName"))) }, 12)
+        val readGranted = checkSelfPermission(Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED
+        permission.addSpaced(text("历史短信读取权限：${if (readGranted) "已授权" else "补传时申请"}", 12f, muted), 10)
+        if (Build.MANUFACTURER.lowercase(Locale.ROOT) in listOf("xiaomi", "redmi", "poco")) {
+            permission.addSpaced(text("小米 / Redmi / POCO 还需在「其他权限」中将「通知类短信」设为「始终允许」。普通短信权限已授权，也可能读不到验证码短信；此额外权限需在系统页面确认。", 11f, muted), 12)
+            permission.addSpaced(button("设置小米通知类短信权限") { openVendorSmsPermissions() }, 11)
+        }
         val exempt = (getSystemService(POWER_SERVICE) as PowerManager).isIgnoringBatteryOptimizations(packageName)
         permission.addSpaced(text("后台电池限制：${if (exempt) "已允许不受限制" else "可能限制后台执行"}", 12f, muted), 17)
         permission.addSpaced(button("设置后台运行 / 电池优化") { open(Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)) }, 11)
         permission.addSpaced(button("设置自动启动权限") { openAutostart() }, 11)
-        permission.addSpaced(text("在系统设置中允许自启动、后台活动，并根据手机厂商要求锁定最近任务。系统强行停止 App 后，需手动重新打开；后台上传时间由 Android 调度，不能保证实时。", 11f, muted), 13)
+        permission.addSpaced(text("在系统设置中允许自启动、后台活动，并根据手机厂商要求锁定最近任务。小米请允许自启动，并保留通知类短信权限。收到广播后立即尝试上传；网络不可用时排队重试。系统强行停止 App 后，需手动重新打开；另有短信库监听及每 5 秒检查作为备用采集，需要短信读取权限；手机完全休眠或系统冻结仍可能延迟。", 11f, muted), 13)
         content.addSpaced(permission, 17)
         val history = card(); history.addView(text("历史短信补传", 16f, ink, true)); history.addSpaced(text("仅在点击并授权后扫描过去 24 小时的最多 500 条短信，筛选验证码并加入去重队列。", 11f, muted), 9)
         history.addSpaced(button("导入最近 24 小时验证码") {
@@ -179,27 +193,72 @@ class MainActivity : Activity() {
                     if (checkSelfPermission(Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) requestPermissions(arrayOf(Manifest.permission.READ_SMS), 11)
                     else importHistory()
                 }.show()
-        }, 15); content.addSpaced(history, 17)
+        }, 15)
+        if (settings.lastImportResult.isNotBlank()) history.addSpaced(text(settings.lastImportResult, 11f, muted), 12)
+        content.addSpaced(history, 17)
     }
-    private fun enableCollection() { settings.enabled = true; UploadWorker.schedule(this); UploadWorker.enqueue(this, force = true); toast("验证码采集已开启"); render() }
+    private fun enableCollection() {
+        settings.enabled = true; SmsCaptureService.start(this); UploadWorker.schedule(this); UploadWorker.enqueue(this, force = true)
+        toast("验证码采集已开启，后台采集期间会显示常驻通知"); render()
+        if (Build.VERSION.SDK_INT >= 33 && checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED)
+            requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), 12)
+    }
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (grantResults.firstOrNull() != PackageManager.PERMISSION_GRANTED) { toast("权限未授予，请在系统设置中检查短信权限"); return }
+        if (requestCode == 12) { toast(if (grantResults.firstOrNull() == PackageManager.PERMISSION_GRANTED) "后台采集通知已允许" else "通知未允许，可在系统设置中开启"); render(); return }
+        if (grantResults.isEmpty() || grantResults.any { it != PackageManager.PERMISSION_GRANTED }) { toast("请允许短信接收和读取权限，以启用后台备用采集"); return }
         if (requestCode == 10) enableCollection() else if (requestCode == 11) importHistory()
     }
     private fun importHistory() {
         toast("正在扫描最近短信…")
         Background.executor.execute {
-            try {
+            val result = try {
+                var scanned = 0
+                var matched = 0
                 var added = 0
+                val keywords = settings.extraKeywords
                 QueueDb(this).use { db ->
-                    contentResolver.query(Telephony.Sms.CONTENT_URI, arrayOf("address", "body", "date"), "date >= ?", arrayOf((System.currentTimeMillis() - 86400000).toString()), "date DESC")?.use { c ->
-                        var scanned = 0
-                        while (scanned < 500 && c.moveToNext() && settings.enabled) { scanned++; if (db.enqueue(c.getString(0) ?: "unknown", c.getString(1) ?: "", c.getLong(2), settings.extraKeywords)) added++ }
+                    val cursor = contentResolver.query(
+                        Telephony.Sms.CONTENT_URI, arrayOf("address", "body", "date"),
+                        "date >= ?", arrayOf((System.currentTimeMillis() - 86400000).toString()), "date DESC"
+                    ) ?: throw IllegalStateException("SMS provider unavailable")
+                    cursor.use { c ->
+                        while (scanned < 500 && settings.enabled && c.moveToNext()) {
+                            scanned++
+                            val body = c.getString(1) ?: ""
+                            if (QueueDb.isCandidate(body, keywords)) {
+                                matched++
+                                if (db.enqueue(c.getString(0) ?: "unknown", body, c.getLong(2), keywords)) added++
+                            }
+                        }
                     }
                 }
-                UploadWorker.enqueue(this, force = true); runOnUiThread { toast("已导入 $added 条验证码候选短信"); render() }
-            } catch (_: Exception) { runOnUiThread { toast("读取历史短信失败，请检查 READ_SMS 权限") } }
+                UploadWorker.enqueue(this, force = true)
+                val counts = "读取 $scanned 条，命中 $matched 条，新增 $added 条，重复 ${matched - added} 条。"
+                val hint = when {
+                    !settings.enabled -> "采集已关闭，扫描已停止。"
+                    scanned == 0 -> "未读到最近 24 小时的短信；若手机中确实有短信，请检查系统短信权限及厂商额外权限。"
+                    matched == 0 -> "没有命中验证码关键词和数字，请检查短信内容或配置额外关键词；厂商权限也可能隐藏部分短信。"
+                    added == 0 -> "匹配短信已在本地队列中，无需重复导入；请在接收统计查看上传状态。"
+                    else -> "已加入上传队列，请在接收统计查看上传状态。"
+                }
+                "$counts\n$hint"
+            } catch (_: SecurityException) {
+                "读取历史短信被拒绝，请检查短信读取权限及厂商额外权限。"
+            } catch (_: Exception) {
+                "历史短信补传失败，请检查短信权限与本地存储状态。"
+            }
+            settings.lastImportResult = SimpleDateFormat("MM-dd HH:mm", Locale.getDefault()).format(Date()) + "\n" + result
+            runOnUiThread { toast(result); render() }
+        }
+    }
+    private fun openVendorSmsPermissions() {
+        try {
+            startActivity(Intent().setComponent(ComponentName("com.miui.securitycenter", "com.miui.permcenter.permissions.PermissionsEditorActivity"))
+                .putExtra("extra_pkgname", packageName))
+        } catch (_: Exception) {
+            toast("请在应用设置 → 其他权限中允许通知类短信")
+            open(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName")))
         }
     }
     private fun openAutostart() {
