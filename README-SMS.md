@@ -394,18 +394,28 @@ Release 的 Assets 包含：
 
 ## Docker 与 HTTPS 部署
 
+> **Docker 部署后，必须通过 HTTPS 域名访问管理中心并登录。** 两份 Compose 配置都设置了 `NODE_ENV=production`，管理会话 Cookie 带有 `Secure` 标记。普通 HTTP 地址可能显示页面，但无法正常保持登录状态；容器启动成功并不代表 HTTPS 已配置完成。
+
+部署前准备好域名及 HTTPS 反向代理，并将 `ADMIN_ORIGINS` 设置为浏览器实际访问的 HTTPS Origin（协议、域名及非默认端口，不含路径），例如 `https://sms.example.com`。代理配置见下文；手机 App 也应填写相同的 HTTPS 服务地址。
+
 ### 使用发布镜像（推荐）
+
+Docker 镜像为 **`msamor/sms-center:latest`**，拉取命令：
+
+```bash
+docker pull msamor/sms-center:latest
+```
 
 从 Release 下载 `compose.release.yaml` 保存为部署目录中的 `compose.yaml`，或者从源码复制该文件。创建 `.env`：
 
 ```dotenv
-SMS_CENTER_IMAGE=yourname/sms-center:1.0.0
+SMS_CENTER_IMAGE=msamor/sms-center:latest
 ADMIN_USERNAME=admin
 ADMIN_PASSWORD=
 ADMIN_ORIGINS=https://sms.example.com
 ```
 
-镜像名和版本使用 Release 说明中的实际值，域名替换为自己的 HTTPS 域名：
+`latest` 用于获取最新发布镜像；如需固定版本，将 `latest` 替换为 Release 说明中的实际版本标签。域名替换为自己的 HTTPS 域名：
 
 ```bash
 docker compose pull
@@ -437,6 +447,8 @@ docker compose logs sms-center
 
 首次登录后仍必须修改初始密码。容器使用持久卷 `sms-data`，数据库和密钥在 `/app/server/data/`。
 
+### 配置 HTTPS 反向代理
+
 Compose 将 Node 绑定到宿主机 **`127.0.0.1:3000`**，配置 HTTPS 反向代理后再对外提供访问。可参考 [deploy/Caddyfile.example](deploy/Caddyfile.example)：
 
 ```caddyfile
@@ -447,6 +459,8 @@ sms.example.com {
     }
 }
 ```
+
+将示例域名替换为自己的域名，确保域名解析到部署服务器，且 80/443 端口可访问，以便 Caddy 申请证书并提供 HTTPS。配置完成后，浏览器访问 `https://sms.example.com`。
 
 示例适用于 Caddy 在宿主机运行的情况；如 Caddy 在其他容器中运行，需调整端口、网络与上游地址。`TRUST_PROXY=1` 仅用于单层可信代理，不能在 Node 端口向不可信客户端开放时随意启用。
 

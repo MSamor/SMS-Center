@@ -95,3 +95,15 @@ ANDROID_HOME=/path/to/android/sdk ANDROID_SERIAL=emulator-5554 python3 scripts/a
 
 - Android 仪器测试 3/3 通过：跨广播 / 短信库时间戳去重、移除原文后指纹仍去重且后续不同时间同文可入队、v1→v2 迁移保留队列和 payload。
 - 模拟器 HOME 后台约 1.04 秒、息屏约 1.57 秒上传；仅向短信库写入、无 SMS_RECEIVED 的短信约 1.50 秒上传；4 次不同发送最终对应 4 条服务端记录，双入口无重复。
+
+## 2026-10-08 长时间后台停顿与厂商唤醒锁禁用
+
+- 真机短信 received_at=17:36:38，直到打开 App 的 17:40:15 才完成上传；采集服务仍在，标准 Doze 为 ACTIVE，不能仅以服务存在或 Doze 状态判定线程运行。
+- 实际日志记录 `frozen uid = 10298 reason=tobg`，以及应用部分唤醒锁 `disabled: true, procState: 4, reason: greeze`；`dumpsys power` 中该锁显示 `DISABLED`。加入 WakeLock 并不自动解除 OEM 冻结。
+- 增加默认关闭的「持续实时采集」开关：采集服务运行且模式启用时申请 partial WakeLock，单次租约 10 分钟、5 分钟续租；关闭模式、关闭采集、服务销毁释放。通知显示实时 / 省电模式及耗电说明。用户测试手机已启用此模式。
+- 统计页增加唤醒锁**申请**状态、最近 / 最长扫描间隔、最近 HTTP 请求时间和结果；明确 isHeld 不代表系统未禁用。
+- 该手机 `MILLET_NO_RESTRICT_APP` 原目标条目含前导空格 ` com.smscenter.app`。保留原包名集合，规范化分隔空格并触发配置刷新后，观察到锁恢复有效、息屏扫描间隔恢复约 5000～5001ms。未单独隔离“空格解析”和“刷新缓存”两个因素，不能断言空格是唯一原因。
+- 未禁用系统全局冻结、省电或安全组件。修改前名单保存在被 Git 忽略的 `artifacts/xiaomi-no-restrict-before-normalize.txt`，仅作为该手机本地回退副本，App 不自动写厂商名单。
+- Android instrumentation 4/4 通过，新增验证实时模式默认不持锁、开启持锁、关闭模式 / 关闭采集 / stop 全部释放；构建、HTTP 单元测试、Lint 通过。
+- 刷新厂商配置后，真机息屏观察从 17:52:49 到 17:56:29 连续约 4 分钟，扫描间隔 5000～5001ms，锁未再标记 DISABLED；没有新的真实 SMS 端到端测试，不能以此宣称长期问题完全解决。
+- 厂商配置可能被系统后续重写，有限时长的检查连续性验证不能代表长时间所有机型后台 SMS 端到端稳定性。

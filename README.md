@@ -15,21 +15,39 @@
 
 ---
 
-将手机收到的验证码集中到一个地方：Android App 负责采集和上传，Node 服务负责加密存储与授权查询，Vue 管理中心负责查看记录、管理设备和追踪接口访问。
-
-**一次构建，一个服务。** Vue 页面打包至 `server/public/`，启动 Node 即可同时提供管理页面和全部 API。
-
-## ✨ 核心功能
-
-- 📱 **Android 采集**：短信接收、上传统计、权限引导、加密离线队列与失败重试。
-- 🔐 **加密存储**：AES-256-GCM 加密短信内容，超级管理员首次登录强制修改密码。
-- 🔑 **授权查询**：上传与查询 Token 独立，按短信签名和设备分配权限，获取最新有效验证码。
-- 🖥️ **管理中心**：数据概览、短信分类筛选、设备管理、凭证分配和接口审计。
-- ⚙️ **自动发布**：GitHub Actions 检查代码，按版本标签发布签名 APK 和 Docker Hub 镜像。
+集中采集 Android 验证码短信，支持加密存储、设备管理和 Token 授权查询。
 
 ## 🚀 快速开始
 
-需要 **Node.js ≥22.12.0**，建议使用 Node 24。
+### Docker 部署（推荐）
+
+镜像：`msamor/sms-center:latest`。
+
+```bash
+docker pull msamor/sms-center:latest
+```
+
+从 [Releases](https://github.com/MSamor/SMS-Center/releases) 下载 `compose.release.yaml`，保存为 `compose.yaml`。在同目录创建 `.env`，只需配置：
+
+```dotenv
+SMS_CENTER_IMAGE=msamor/sms-center:latest
+ADMIN_ORIGINS=https://sms.example.com
+```
+
+将 `ADMIN_ORIGINS` 替换为实际访问的 HTTPS 地址（不含路径），然后启动：
+
+```bash
+docker compose up -d
+docker compose logs sms-center
+```
+
+> **Docker 部署后必须通过 HTTPS 访问管理中心。** 配置 HTTPS 反向代理，将域名转发到宿主机 `127.0.0.1:3000`，再访问自己的 HTTPS 域名。代理配置见 [部署指南](README-SMS.md#docker-与-https-部署)。
+
+默认账号为 `admin`，初始密码从容器日志获取，首次登录后必须修改密码。
+
+### 本地运行
+
+需要 Node.js ≥22.12.0。
 
 ```bash
 git clone https://github.com/MSamor/SMS-Center.git
@@ -40,27 +58,34 @@ npm run build
 npm start
 ```
 
-浏览器访问 **http://localhost:3000**。Windows 用户可手动复制配置文件。
-
-首次启动默认创建超级管理员 `admin`；初始密码留空时会随机生成并在终端显示一次。登录后必须修改密码，才能使用管理功能。
+访问 **http://localhost:3000**，使用 `admin` 和终端显示的初始密码登录。
 
 ## 📱 连接手机
 
-1. 在 [Releases](https://github.com/MSamor/SMS-Center/releases) 的 **Assets** 中下载版本 APK。
-2. 在管理中心添加设备，保存生成的上传 Token。
-3. 在 App 中填写手机可访问的服务地址和 Token，授权短信接收并开启采集。
-4. 在管理中心分配查询 Token，通过 API 获取指定签名的验证码。
+1. 从 [Releases](https://github.com/MSamor/SMS-Center/releases) 下载并安装 APK。
+2. 在管理中心添加设备，获取上传 Token。
+3. 在 App 中填写服务地址和上传 Token，授权短信权限并开启采集。
 
-安装、后台运行设置和接口示例见 [完整使用指南](README-SMS.md)。版本发布使用维护者配置的固定 Release 签名；首次发布前请完成 [发布配置](README-SMS.md#github-actions-自动构建)。
+需要通过 API 查询验证码时，在管理中心创建查询 Token，参见 [API 文档](docs/API.md)。
 
-## 📚 文档
+## 🖼️ 界面预览
 
-| 文档                              | 内容                                                                      |
-| --------------------------------- | ------------------------------------------------------------------------- |
-| [📖 完整使用指南](README-SMS.md)  | 配置、初始改密、手机接入、开发构建、Actions、Docker/HTTPS、备份与常见问题 |
-| [🔌 API 文档](docs/API.md)        | 短信上传、验证码查询、Token 权限、管理接口与错误码                        |
-| [🧪 验证记录](docs/VALIDATION.md) | 已执行的检查、模拟器验证与当前边界                                        |
+**管理中心 · 数据概览**
 
-## 🤝 参与贡献
+![SMS Center 管理中心数据概览](docs/Snipaste_2026-10-08_18-06-16.png)
 
-欢迎提交 Issue 和 Pull Request。提交前请运行 `npm run check`，并避免提交 `.env`、数据库、密钥或业务 Token。许可证状态见 [完整使用指南](README-SMS.md#项目结构与当前边界)。
+**管理中心 · 短信记录**
+
+![SMS Center 管理中心短信记录](docs/Snipaste_2026-10-08_18-06-27.png)
+
+**Android App**（首次接入状态）
+
+| 接收统计                                                                       | 连接与设置                                                                     |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| <img src="docs/app-statistics.png" alt="Android App 接收统计页面" width="320"> | <img src="docs/app-settings.png" alt="Android App 连接与设置页面" width="320"> |
+
+## 📚 更多文档
+
+- [完整使用指南](README-SMS.md)：详细配置、HTTPS 部署、备份与常见问题。
+- [API 文档](docs/API.md)：短信上传、验证码查询与 Token 权限。
+- [验证记录](docs/VALIDATION.md)：已执行的检查与验证边界。
