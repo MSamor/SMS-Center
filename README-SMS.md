@@ -145,7 +145,7 @@ ADMIN_PASSWORD=自行填写至少12字符的初始密码
 
 ### 获取 APK
 
-正式版本在仓库 **Releases → 对应版本 → Assets** 下载 `sms-center-vX.Y.Z.apk`，同时提供 `SHA256SUMS.txt`。发布前尚无版本时，可从 **Actions → Build and Test → Artifacts** 下载 Debug 测试包。自动发布说明见 [GitHub Actions](#github-actions-自动构建)。
+正式版本在仓库 **Releases → 对应版本 → Assets** 下载 `sms-center-vX.Y.Z.apk`，同时提供 `SHA256SUMS.txt`。发布前尚无版本时，可按照下面的命令在本地构建 Debug 测试包。自动发布说明见 [GitHub Actions](#github-actions-自动构建)。
 
 也可以自行构建。需要 JDK 17（或兼容的 JDK 21）、Android SDK、Platform 35 和 Build Tools 35.0.0：
 
@@ -167,7 +167,7 @@ ADB 安装到测试设备：
 adb install -r -g android/app/build/outputs/apk/debug/app-debug.apk
 ```
 
-APK 最低支持 Android 8.0（API 26）。日常 CI 使用 Debug 签名；版本发布使用维护者在 Secrets 中配置的固定签名。后续更新必须保留同一发布密钥。Debug 测试包与 Release 包可能签名不同，首次切换需卸载旧测试包；卸载会移除 App 本地配置与队列。
+APK 最低支持 Android 8.0（API 26）。本地 Debug 构建使用测试签名；版本发布使用维护者在 Secrets 中配置的固定签名。后续更新必须保留同一发布密钥。Debug 测试包与 Release 包可能签名不同，首次切换需卸载旧测试包；卸载会移除 App 本地配置与队列。
 
 ### 接入步骤
 
@@ -320,12 +320,9 @@ cd android
 
 ## GitHub Actions 自动构建
 
-仓库包含日常检查和版本发布两个工作流：
+仓库只保留 [Publish Release](.github/workflows/release.yml) 一个工作流，**仅推送 `v*` 版本标签时触发**。普通分支推送、PR 和手动操作不触发构建。
 
-| 工作流                                           | 触发                                  | 用途                                                     |
-| ------------------------------------------------ | ------------------------------------- | -------------------------------------------------------- |
-| [Build and Test](.github/workflows/ci.yml)       | 分支推送、PR、手动运行                | Debug APK、Android Lint、Node 测试、Vue 构建与浏览器联调 |
-| [Publish Release](.github/workflows/release.yml) | `v*` 标签推送，或手动指定已存在的标签 | 签名 APK、Docker Hub 镜像、GitHub Release 与发布说明     |
+发布工作流包含格式检查、Node 测试、Vue 构建、浏览器联调、签名 APK 构建、Docker Hub 镜像推送和 GitHub Release 发布，不再重复运行独立的 Build and Test 工作流。
 
 ### 配置发布凭证
 
@@ -342,7 +339,7 @@ cd android
 
 在同页面 **Variables** 配置 `DOCKERHUB_IMAGE`，例如 `yourname/sms-center`，使用小写，不包含 `docker.io/`、标签或 digest。提前创建 Docker Hub 仓库，需要公开下载时设置为 Public。凭证不会写入源码，APK 密钥在 runner 临时目录恢复，任务结束时清理。
 
-GitHub Release 使用内置 `GITHUB_TOKEN`，无需另建 GitHub PAT；只有发布任务授予 `contents: write`。日常 CI/PR 不读取发布 Secrets。第三方 Actions 固定到 commit SHA。
+GitHub Release 使用内置 `GITHUB_TOKEN`，无需另建 GitHub PAT；只有发布任务授予 `contents: write`。普通分支推送和 PR 不运行发布流程。第三方 Actions 固定到 commit SHA。
 
 ### 发布版本
 
@@ -353,7 +350,7 @@ git tag -a v1.0.0 -m "SMS Center v1.0.0"
 git push origin v1.0.0
 ```
 
-也可在 **Actions → Publish Release → Run workflow** 输入已推送的标签。所有发布构建使用标签指向的同一个 commit。
+所有发布构建使用标签指向的同一个 commit。工作流不提供手动 Run workflow 入口；失败后可在原运行页面使用 Re-run jobs 重试。
 
 支持 `v1.2.3` 正式版本及 `v1.2.3-alpha.1`、`v1.2.3-beta.1`、`v1.2.3-rc.1` 预发布。当前映射支持 major 0～199、minor/patch 0～99、预发布序号 1～199，不支持其他后缀或 build metadata。APK `versionName` 为去掉 v 的版本；`versionCode` 使用以下确定性映射：
 
@@ -385,7 +382,7 @@ Release 的 Assets 包含：
 
 镜像标签为 `DOCKERHUB_IMAGE:X.Y.Z`（不含 v）。正式版同时更新 `latest`，含义为最近一次成功发布的正式版本；生产环境推荐固定版本或 digest，不依赖 latest。请按版本递增顺序发布，避免后发布旧版本将 latest 指向旧版本。
 
-日常 CI 的 Debug APK 与报告仍在 Artifacts 下载，默认保留 14 天。Release 附件由发布流程上传，不使用这项 14 天自动过期设置。静态页面 Artifact 不是完整后台部署包。
+发布过程的 APK 中间产物和失败报告在 Artifacts 保留 14 天。用户直接从 Release 下载最终附件，不使用这项 14 天自动过期设置。
 
 ### 失败重跑
 
@@ -512,7 +509,7 @@ Android 和厂商省电策略会影响调度。允许自启动、后台运行并
 
 ```text
 SMS-Center/
-├── .github/workflows/         # 日常 CI 与签名 APK / Docker Hub / Release 发布
+├── .github/workflows/         # 仅版本标签触发的 APK / Docker Hub / Release 发布
 ├── android/                   # 原生 Android App 与 Gradle Wrapper
 ├── admin/                     # Vue 源码；dist 为构建输出
 ├── server/

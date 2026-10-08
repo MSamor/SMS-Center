@@ -4,12 +4,6 @@ on:
   push:
     tags:
       - 'v*'
-  workflow_dispatch:
-    inputs:
-      tag:
-        description: 'Existing version tag, e.g. v1.0.0 or v1.1.0-rc.1'
-        required: true
-        type: string
 
 permissions:
   contents: read
@@ -36,7 +30,7 @@ jobs:
       apkName: ${{ steps.version.outputs.apkName }}
       sha: ${{ steps.commit.outputs.sha }}
     env:
-      RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+      RELEASE_TAG: ${{ github.ref_name }}
       DOCKERHUB_IMAGE: ${{ vars.DOCKERHUB_IMAGE }}
     steps:
       - name: Checkout

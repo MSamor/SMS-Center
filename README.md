@@ -46,7 +46,7 @@ npm start
 
 ## 📱 连接手机
 
-1. 在 [Releases](https://github.com/MSamor/SMS-Center/releases) 的 **Assets** 中下载版本 APK；日常测试包仍可从 Actions 的 Artifacts 获取。
+1. 在 [Releases](https://github.com/MSamor/SMS-Center/releases) 的 **Assets** 中下载版本 APK。
 2. 在管理中心添加设备，保存生成的上传 Token。
 3. 在 App 中填写手机可访问的服务地址和 Token，授权短信接收并开启采集。
 4. 在管理中心分配查询 Token，通过 API 获取指定签名的验证码。
