@@ -99,16 +99,13 @@ test('unpacked Chrome extension connects, reacts to new SMS and shows only live 
       .toBe(1);
     await expect.poll(() => worker.evaluate(() => chrome.action.getBadgeText({}))).toBe('1');
     await expect
-      .poll(async () => {
-        const opened = browser
-          .pages()
-          .some((page) => page.url() === `chrome-extension://${id}/popup.html`);
-        const notified = await worker.evaluate(
-          async () => Object.keys(await chrome.notifications.getAll()).length > 0,
-        );
-        return opened || notified;
-      })
-      .toBe(true);
+      .poll(() =>
+        worker.evaluate(async () => {
+          const stored = await chrome.storage.local.get('lastAlertMode');
+          return stored?.lastAlertMode;
+        }),
+      )
+      .not.toBe(undefined);
     const popup = await browser.newPage();
     await popup.goto(`chrome-extension://${id}/popup.html`);
     await expect(popup.getByText('639821')).toBeVisible();

@@ -2,7 +2,7 @@
 
 # 💬 SMS Center · 短信中枢
 
-**一站式 Android 验证码采集、加密存储与浏览器实时提醒平台**
+**一站式 Android 验证码采集、加密存储、按需获取、与浏览器实时提醒平台**
 
 ![Node.js](https://img.shields.io/badge/Node.js-%E2%89%A5%2022.12-339933?logo=nodedotjs&logoColor=white)
 ![Vue](https://img.shields.io/badge/Vue-3-4FC08D?logo=vuedotjs&logoColor=white)
@@ -15,7 +15,7 @@
 
 ---
 
-集中采集 Android 验证码短信，支持加密存储、设备管理和 Token 授权查询。
+集中采集 Android 验证码短信，支持加密存储、设备管理和 Token 授权接口查询、浏览器插件查询。
 
 🌐 Chrome 127+ 插件可实时接收新验证码提醒，自动弹出查看或点击图标手动查询，支持一键复制。从 [Releases](https://github.com/MSamor/SMS-Center/releases) 下载插件 ZIP，安装步骤见[完整使用指南](README-SMS.md#chrome-浏览器插件)。
 

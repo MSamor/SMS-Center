@@ -9,7 +9,40 @@ let connected = false;
 let authRejected = false;
 let popupOpen = false;
 let lastAlert = 0;
+let lastAlertMode;
 const alarmName = 'sms-center-check';
+
+function sendRuntimeMessage(message) {
+  try {
+    const pending = chrome.runtime.sendMessage(message);
+    pending?.catch?.(() => {});
+  } catch {
+    // No extension page is open to receive the update.
+  }
+}
+
+async function recordAlert(mode) {
+  lastAlertMode = mode;
+  try {
+    await chrome.storage.local.set({ lastAlertMode: mode });
+  } catch {
+    // Storage failure must not prevent the in-memory alert state from updating.
+  }
+}
+
+async function withTimeout(promise, milliseconds, label) {
+  let timer;
+  try {
+    await Promise.race([
+      Promise.resolve(promise),
+      new Promise((_, reject) => {
+        timer = setTimeout(() => reject(new Error(`${label} timeout`)), milliseconds);
+      }),
+    ]);
+  } finally {
+    clearTimeout(timer);
+  }
+}
 
 async function badge(text, color) {
   await chrome.action.setBadgeBackgroundColor({ color });
@@ -31,17 +64,30 @@ async function refreshCount() {
 }
 
 async function alertNewCode() {
-  if (popupOpen || Date.now() - lastAlert < 5000) return;
+  if (popupOpen || Date.now() - lastAlert < 5000) {
+    await recordAlert('already-open');
+    return;
+  }
   lastAlert = Date.now();
   try {
-    await chrome.action.openPopup();
+    await withTimeout(chrome.action.openPopup(), 1500, 'openPopup');
+    await recordAlert('popup');
   } catch {
-    await chrome.notifications.create('sms-center-new-code', {
-      type: 'basic',
-      title: '收到新验证码',
-      message: '打开 SMS Center 插件查看并复制。',
-      iconUrl: 'icon128.png',
-    });
+    await recordAlert('notification');
+    try {
+      await withTimeout(
+        chrome.notifications.create('sms-center-new-code', {
+          type: 'basic',
+          title: '收到新验证码',
+          message: '打开 SMS Center 插件查看并复制。',
+          iconUrl: 'icon128.png',
+        }),
+        1500,
+        'notification',
+      );
+    } catch {
+      await recordAlert('failed');
+    }
   }
 }
 
@@ -87,7 +133,7 @@ async function connect() {
     if (event.type === 'ready') {
       connected = true;
       authRejected = false;
-      chrome.runtime.sendMessage({ type: 'codes.status', connected: true }).catch(() => {});
+      sendRuntimeMessage({ type: 'codes.status', connected: true });
       retryDelay = 1000;
       pingTimer = setInterval(() => {
         if (ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({ type: 'ping' }));
@@ -95,7 +141,7 @@ async function connect() {
       await refreshCount();
     } else if (event.type === 'code.created') {
       await refreshCount();
-      chrome.runtime.sendMessage({ type: 'codes.updated' }).catch(() => {});
+      sendRuntimeMessage({ type: 'codes.updated' });
       await alertNewCode();
     }
   };
@@ -103,7 +149,7 @@ async function connect() {
   ws.onclose = ({ code }) => {
     if (current !== generation) return;
     connected = false;
-    chrome.runtime.sendMessage({ type: 'codes.status', connected: false }).catch(() => {});
+    sendRuntimeMessage({ type: 'codes.status', connected: false });
     clearInterval(pingTimer);
     if (code === 4401 || code === 4403) {
       authRejected = true;
@@ -162,7 +208,7 @@ chrome.runtime.onConnect.addListener((port) => {
 });
 chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   if (message?.type === 'status') {
-    sendResponse({ connected });
+    sendResponse({ connected, lastAlertMode });
   } else if (message?.type === 'refresh') {
     refreshCount();
   }
