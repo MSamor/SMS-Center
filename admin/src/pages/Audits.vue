@@ -10,6 +10,9 @@ const notify = inject('notify'),
 const filters = reactive({ action: 'query', signature: '', status: '' });
 const labels = {
   query: '验证码查询',
+  'query.recent': '有效验证码列表',
+  'stream.connect': '实时连接',
+  'stream.push': '实时推送',
   upload: '短信上传',
   'admin.reveal': '查看明文',
   'admin.login': '管理员登录',

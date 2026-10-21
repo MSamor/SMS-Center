@@ -2,7 +2,7 @@
 
 # 💬 SMS Center · 短信中枢
 
-**一站式 Android 验证码采集、加密存储与查询平台**
+**一站式 Android 验证码采集、加密存储与浏览器实时提醒平台**
 
 ![Node.js](https://img.shields.io/badge/Node.js-%E2%89%A5%2022.12-339933?logo=nodedotjs&logoColor=white)
 ![Vue](https://img.shields.io/badge/Vue-3-4FC08D?logo=vuedotjs&logoColor=white)
@@ -16,6 +16,8 @@
 ---
 
 集中采集 Android 验证码短信，支持加密存储、设备管理和 Token 授权查询。
+
+🌐 Chrome 127+ 插件可实时接收新验证码提醒，自动弹出查看或点击图标手动查询，支持一键复制。从 [Releases](https://github.com/MSamor/SMS-Center/releases) 下载插件 ZIP，安装步骤见[完整使用指南](README-SMS.md#chrome-浏览器插件)。
 
 ## 🚀 快速开始
 
@@ -68,6 +70,10 @@ npm start
 
 需要通过 API 查询验证码时，在管理中心创建查询 Token，参见 [API 文档](docs/API.md)。
 
+## 🌐 Chrome 浏览器插件
+
+从 [Releases](https://github.com/MSamor/SMS-Center/releases) 下载 `sms-center-chrome-vX.Y.Z.zip`，解压后在 Chrome 127+ 的 `chrome://extensions` 开启开发者模式，选择「加载已解压的扩展程序」。在管理中心创建限定签名和设备的 `qry_` 查询 Token，填入插件设置页即可接收提醒。公网部署需 HTTPS/WSS；自动弹窗不可用时使用通知和角标提示。[查看安装与使用说明](README-SMS.md#chrome-浏览器插件)。
+
 ## 🖼️ 界面预览
 
 **管理中心 · 数据概览**
@@ -83,6 +89,12 @@ npm start
 | 接收统计                                                                       | 连接与设置                                                                     |
 | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
 | <img src="docs/app-statistics.png" alt="Android App 接收统计页面" width="320"> | <img src="docs/app-settings.png" alt="Android App 连接与设置页面" width="320"> |
+
+**Chrome 插件**（测试数据示例）
+
+| 连接设置                                                                                                 | 有效验证码弹窗                                                                                          |
+| -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| <img src="docs/chrome-settings.png" alt="Chrome 插件连接设置，填写服务中心地址和查询 Token" width="400"> | <img src="docs/chrome-popup.png" alt="Chrome 插件显示有效验证码及复制按钮，内容为测试数据" width="370"> |
 
 ## 📚 更多文档
 

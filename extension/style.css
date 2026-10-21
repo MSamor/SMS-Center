@@ -1,0 +1,248 @@
+:root {
+  color-scheme: light;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #1b302b;
+  background: #f7faf9;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+button,
+input {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid #087d65;
+  outline-offset: 2px;
+}
+.brand-icon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex: none;
+  border-radius: 6px;
+  background: #087d65;
+  color: white;
+  font-weight: 800;
+  font-size: 19px;
+}
+.popup-page {
+  width: 370px;
+  min-height: 210px;
+  max-height: 560px;
+  overflow-y: auto;
+}
+.popup-header,
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 15px 18px;
+  border-bottom: 1px solid #dce8e3;
+}
+.popup-header {
+  justify-content: space-between;
+  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.heading,
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+strong {
+  font-size: 14px;
+}
+.heading small,
+.page-header small {
+  display: block;
+  margin-top: 2px;
+  color: #657373;
+  font-size: 11px;
+}
+.icon-button {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: #375d53;
+  font-size: 23px;
+  line-height: 1;
+}
+.icon-button:hover,
+.secondary:hover {
+  background: #e6f2ed;
+}
+.popup-page main {
+  padding: 12px 18px;
+}
+.filter {
+  display: flex;
+  gap: 7px;
+}
+.filter input {
+  flex: 1;
+  min-width: 0;
+}
+input {
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid #c8d8d2;
+  border-radius: 5px;
+  background: white;
+  color: #1b302b;
+}
+.secondary {
+  border: 1px solid #c8d8d2;
+  border-radius: 5px;
+  padding: 7px 11px;
+  background: white;
+  color: #1b302b;
+}
+.status {
+  margin: 10px 0;
+  min-height: 17px;
+  color: #657373;
+  font-size: 12px;
+}
+.status.success {
+  color: #087d65;
+}
+.status.error {
+  color: #ad4e31;
+}
+.codes {
+  display: grid;
+  gap: 0;
+}
+.code-item {
+  padding: 12px 0;
+  border-top: 1px solid #dce8e3;
+}
+.item-head,
+.item-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.item-head strong {
+  overflow-wrap: anywhere;
+}
+.item-head time,
+.code-item small {
+  color: #657373;
+  font-size: 11px;
+  white-space: nowrap;
+}
+.item-main {
+  margin: 8px 0 4px;
+}
+.code-value {
+  font-size: 23px;
+  line-height: 1.1;
+  font-weight: 700;
+  color: #1e5548;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+.copy-button {
+  width: 36px;
+  height: 32px;
+  flex: none;
+  border: 1px solid #b6d9c8;
+  border-radius: 5px;
+  background: #e8f5ed;
+  color: #087d65;
+  font-size: 20px;
+}
+.copy-button:hover {
+  background: #d4eddd;
+}
+.pagination {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 5px;
+  border-top: 1px solid #dce8e3;
+  background: white;
+  color: #657373;
+  font-size: 12px;
+}
+.pagination[hidden] {
+  display: none;
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+.options-page {
+  padding: 40px 16px;
+}
+.options-shell {
+  max-width: 460px;
+  margin: 0 auto;
+  background: white;
+  border: 1px solid #dce8e3;
+  border-radius: 6px;
+}
+.options-shell .page-header {
+  padding: 20px 24px;
+}
+.options-shell form {
+  padding: 24px;
+}
+.options-shell label {
+  display: block;
+  margin: 0 0 7px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.options-shell input {
+  margin: 0 0 19px;
+}
+.field-note {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #657373;
+  margin: -8px 0 14px;
+}
+.form-actions {
+  display: flex;
+  gap: 9px;
+}
+.primary {
+  border: 1px solid #087d65;
+  border-radius: 5px;
+  padding: 9px 15px;
+  background: #087d65;
+  color: white;
+}
+.primary:hover {
+  background: #076650;
+}

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SMS Center - 验证码</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="popup-page">
+    <header class="popup-header">
+      <div class="heading">
+        <span class="brand-icon" aria-hidden="true">#</span>
+        <div><strong>验证码</strong><small id="connection-status">正在连接</small></div>
+      </div>
+      <div class="header-actions">
+        <button
+          class="icon-button"
+          id="refresh"
+          type="button"
+          title="刷新记录"
+          aria-label="刷新记录"
+        >
+          ↻
+        </button>
+        <button
+          class="icon-button"
+          id="settings"
+          type="button"
+          title="连接设置"
+          aria-label="连接设置"
+        >
+          ⚙
+        </button>
+      </div>
+    </header>
+    <main>
+      <form id="filter" class="filter">
+        <label for="signature" class="visually-hidden">短信签名</label
+        ><input id="signature" type="search" placeholder="筛选短信签名" maxlength="64" /><button
+          type="submit"
+          class="secondary"
+        >
+          筛选
+        </button>
+      </form>
+      <p id="notice" class="status" role="status" aria-live="polite"></p>
+      <div id="codes" class="codes"></div>
+    </main>
+    <footer id="pagination" class="pagination" hidden>
+      <button id="previous" type="button" class="icon-button" title="上一页" aria-label="上一页">
+        ‹</button
+      ><span id="page-label"></span
+      ><button id="next" type="button" class="icon-button" title="下一页" aria-label="下一页">
+        ›
+      </button>
+    </footer>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

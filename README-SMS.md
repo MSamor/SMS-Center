@@ -15,6 +15,7 @@
 - [初始化超级管理员](#初始化超级管理员)
 - [安装 APK 与连接手机](#安装-apk-与连接手机)
 - [调用验证码查询 API](#调用验证码查询-api)
+- [Chrome 浏览器插件](#chrome-浏览器插件)
 - [配置说明](#配置说明)
 - [开发、构建与测试](#开发构建与测试)
 - [GitHub Actions 自动构建](#github-actions-自动构建)
@@ -30,6 +31,7 @@
 | Android App  | Kotlin / Android Keystore / WorkManager | 新短信接收、统计、服务连接配置、权限引导、加密离线队列、退避重试、手动导入历史验证码          |
 | 短信服务中心 | Node.js / Express / SQLite              | 加密短信存储、签名识别、设备绑定上传 Token、签名/设备范围查询 Token、最新有效验证码查询、审计 |
 | 管理页面     | Vue 3 / Vite                            | 概览、短信筛选与详情、设备管理、凭证分配/撤销、接口审计、识别规则、保留策略、密码管理         |
+| Chrome 插件  | Manifest V3 / WebSocket                 | 实时提醒、有效验证码列表、复制验证码、断线补查                                                |
 
 ```mermaid
 flowchart LR
@@ -235,6 +237,31 @@ curl -G 'http://localhost:3000/api/v1/codes/latest' \
 
 可选参数 `deviceId` 限制来源设备，`maxAgeSeconds` 缩短查询有效期。默认有效期 600 秒；调用方不能通过参数扩大服务端的有效期设置。“最新”按短信接收时间排序，上传时间用于同时间排序。
 
+浏览器插件还使用 `/api/v1/codes/recent` 获取其查询 Token 授权范围内的有效记录，并通过 `/api/v1/codes/stream` 建立 WSS 实时连接；消息格式见 [API 文档](docs/API.md)。
+
+## Chrome 浏览器插件
+
+1. 使用 Chrome **127 或更高版本**。从 GitHub Release 的 Assets 下载 `sms-center-chrome-vX.Y.Z.zip` 并解压；在 `chrome://extensions` 开启开发者模式，点击「加载已解压的扩展程序」，选择包含 `manifest.json` 的解压目录。源码安装也可直接选择仓库的 `extension/` 目录。ZIP 不能直接当 APK 安装；如需浏览器商店一键安装，需要另行发布到 Chrome Web Store。
+2. 在管理页面「访问凭证」创建一个专供插件使用的 `qry_` **查询** Token，按实际需求限制签名、设备和到期时间，完整 Token 只显示一次。不要填写 Android App 使用的 `upl_` Token。
+3. 打开插件「连接设置」，填写服务根地址（例如 `https://sms.wpaini.com`）和查询 Token，点击「验证并保存」，同意站点访问权限。公网地址须为 HTTPS；仅本机开发允许 `http://localhost` 或 `http://127.0.0.1`。
+4. 收到新的有效验证码时插件尝试自动打开弹窗；打不开时显示不含验证码的系统通知和图标角标。点击图标可随时查看后台设定有效期内的记录，并点击复制按钮复制。签名搜索是精确匹配；列表支持翻页。
+
+插件只在浏览器运行且与服务建立连接时接收实时事件；网络断开、休眠或浏览器退出期间无法保证弹出，恢复连接后会补查仍有效的记录、更新角标，但不会把旧短信再次当作新消息弹窗。浏览器本地保存查询 Token 以便重连，**不要在共享电脑安装或配置此插件**；卸载前可在设置页移除连接，服务端可随时撤销 Token。验证码明文只在打开弹窗查询时读取，不随 WebSocket 事件发送或持久化到插件存储。
+
+**界面示例**（截图使用自动化测试数据，不包含真实 Token 或短信）：
+
+| 连接设置                                                                                | 验证码弹窗                                                                             |
+| --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| <img src="docs/chrome-settings.png" alt="浏览器插件设置服务地址与查询凭证" width="400"> | <img src="docs/chrome-popup.png" alt="浏览器插件显示测试验证码及复制操作" width="370"> |
+
+本地源码打包需 Node.js >=22.12.0 及 `zip`/`unzip`，在仓库根目录执行：
+
+```bash
+node scripts/package-extension.js v1.2.3 release-dist/sms-center-chrome-v1.2.3.zip
+```
+
+脚本检查插件必需文件，按标签生成 Chrome 扩展清单版本，并验证 ZIP 可解压；只打包运行文件，不包含测试文件或服务端密钥。覆盖升级时保留原来的解压目录并在扩展管理页重新加载；改变目录可能导致 Chrome 将其识别为另一个本地扩展。GitHub Release 附件由 tag 工作流自动生成，不需要额外配置插件签名密钥。
+
 ### 上传接口
 
 ```bash
@@ -324,7 +351,7 @@ cd android
 
 仓库只保留 [Publish Release](.github/workflows/release.yml) 一个工作流，**仅推送 `v*` 版本标签时触发**。普通分支推送、PR 和手动操作不触发构建。
 
-发布工作流包含格式检查、Node 测试、Vue 构建、浏览器联调、签名 APK 构建、Docker Hub 镜像推送和 GitHub Release 发布，不再重复运行独立的 Build and Test 工作流。
+发布工作流包含格式检查、Node 测试、Vue 构建、浏览器联调、签名 APK 构建、独立 Chrome 插件 ZIP 构建、Docker Hub 镜像推送和 GitHub Release 发布，不再重复运行独立的 Build and Test 工作流。
 
 ### 配置发布凭证
 
@@ -367,9 +394,9 @@ alpha.N = N；beta.N = 200 + N；rc.N = 400 + N；正式版 = 999
 
 1. 校验标签、镜像名和所有凭证是否存在；已公开的 Release 禁止覆盖，修改后发布新版本。
 2. 运行格式检查、服务端和发布脚本测试、Vue 构建、浏览器联调。
-3. 使用固定签名构建并检查 APK，生成 SHA256 校验文件。
+3. 并行构建签名 APK 与 Chrome 插件 ZIP：插件任务按标签写入清单版本，校验 ZIP，并独立生成 SHA256 校验文件。
 4. 使用 Dockerfile 构建完整 Vue + Node 镜像，在 amd64 上检查页面和数据库健康，再推送 amd64/arm64 多架构镜像。
-5. 生成 Release 说明，创建或更新草稿，上传 APK、校验文件和发布用 Compose。
+5. 下载并复核各构建产物，将插件校验值加入 `SHA256SUMS.txt`；生成 Release 说明、创建或更新草稿，上传 APK、插件 ZIP、校验文件和发布用 Compose。
 6. 正式版将镜像 digest 标记为 latest；预发布不更新 latest。最后公开 Release。
 
 ### 下载与发布说明
@@ -377,14 +404,15 @@ alpha.N = N；beta.N = 200 + N；rc.N = 400 + N；正式版 = 999
 Release 的 Assets 包含：
 
 - `sms-center-vX.Y.Z.apk`：固定签名的 Android Release APK。
-- `SHA256SUMS.txt`：APK 和 Compose 附件校验值。
+- `sms-center-chrome-vX.Y.Z.zip`：Chrome 插件解压安装包（Chrome 127+）。
+- `SHA256SUMS.txt`：APK、插件 ZIP 和 Compose 附件校验值。
 - `compose.release.yaml`：直接拉取镜像的部署配置。
 
 说明自动组合 GitHub 变更记录和安装指南，列出 APK 版本、镜像标签/digest、首次改密、设备接入、数据备份和升级注意事项。文档链接固定到对应版本标签。
 
 镜像标签为 `DOCKERHUB_IMAGE:X.Y.Z`（不含 v）。正式版同时更新 `latest`，含义为最近一次成功发布的正式版本；生产环境推荐固定版本或 digest，不依赖 latest。请按版本递增顺序发布，避免后发布旧版本将 latest 指向旧版本。
 
-发布过程的 APK 中间产物和失败报告在 Artifacts 保留 14 天。用户直接从 Release 下载最终附件，不使用这项 14 天自动过期设置。
+发布过程的 APK、插件 ZIP 中间产物和失败报告在 Artifacts 保留 14 天。用户直接从 Release 下载最终附件，不使用这项 14 天自动过期设置。
 
 ### 失败重跑
 
@@ -461,6 +489,8 @@ sms.example.com {
 ```
 
 将示例域名替换为自己的域名，确保域名解析到部署服务器，且 80/443 端口可访问，以便 Caddy 申请证书并提供 HTTPS。配置完成后，浏览器访问 `https://sms.example.com`。
+
+Chrome 插件的 WSS 地址为 `wss://sms.example.com/api/v1/codes/stream`。示例 Caddy `reverse_proxy` 会转发 WebSocket Upgrade；若使用 Nginx 或其他代理，必须启用 HTTP/1.1 Upgrade/Connection 转发，并将 WebSocket 空闲超时设为大于 25 秒的服务端心跳周期。无需另开端口。
 
 示例适用于 Caddy 在宿主机运行的情况；如 Caddy 在其他容器中运行，需调整端口、网络与上游地址。`TRUST_PROXY=1` 仅用于单层可信代理，不能在 Node 端口向不可信客户端开放时随意启用。
 
@@ -555,9 +585,10 @@ Android 和厂商省电策略会影响调度。允许自启动、后台运行并
 
 ```text
 SMS-Center/
-├── .github/workflows/         # 仅版本标签触发的 APK / Docker Hub / Release 发布
+├── .github/workflows/         # 仅版本标签触发的 APK / 插件 / Docker Hub / Release 发布
 ├── android/                   # 原生 Android App 与 Gradle Wrapper
 ├── admin/                     # Vue 源码；dist 为构建输出
+├── extension/                 # Chrome 插件源码；tag 发布时打包成 ZIP
 ├── server/
 │   ├── src/                   # Node API、加密、数据库与初始化
 │   ├── test/                  # API、安全、初始化与迁移测试
