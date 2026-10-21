@@ -6,6 +6,7 @@ test('login, device, upload, query token, messages, audit and responsive navigat
   const errors = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('/');
+  await expect(page.getByLabel('用户名', { exact: true })).toHaveValue('');
   await page.getByLabel('用户名', { exact: true }).fill('admin');
   await page.getByLabel('密码', { exact: true }).fill('e2e-only-admin-password');
   await page.getByRole('button', { name: '登录管理中心' }).click();
@@ -17,6 +18,7 @@ test('login, device, upload, query token, messages, audit and responsive navigat
   await page.getByLabel('新密码', { exact: true }).fill('e2e-changed-admin-password');
   await page.getByLabel('确认新密码', { exact: true }).fill('e2e-changed-admin-password');
   await page.getByRole('button', { name: '修改密码并重新登录' }).click();
+  await page.getByLabel('用户名', { exact: true }).fill('admin');
   await page.getByLabel('密码', { exact: true }).fill('e2e-changed-admin-password');
   await page.getByRole('button', { name: '登录管理中心' }).click();
   await expect(page.getByRole('heading', { name: '数据概览', exact: true })).toBeVisible();

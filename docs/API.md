@@ -48,6 +48,28 @@
 
 查询 Token 的 `signatures: ["*"]` 表示全部签名；必须单独指定通配符。`deviceIds: []` 表示全部设备。具体签名白名单和设备白名单同时生效。
 
+## 有效验证码列表
+
+### GET /api/v1/codes/recent
+
+`Authorization: Bearer <查询Token>`。返回 Token 授权的所有签名、设备中仍在后台有效期内的验证码；不提供 `maxAgeSeconds` 参数，也不返回短信正文。可选 `signature`、`deviceId` 精确过滤（越权返回 403）；`page` 默认 1，`pageSize` 默认 20、最大 100。
+
+响应 `data` 为 `{ items, total, page, pageSize, serverTime }`；每条 `items` 包含 `{ id, signature, code, deviceId, receivedAt, expiresAt }`。无记录返回空数组而不是 404；`expiresAt` 按当前后台设置计算。修改有效期、禁用设备、撤销 Token 后再次查询立即生效。列表查询记为 `query.recent` 审计。
+
+## 新验证码 WebSocket
+
+### WSS /api/v1/codes/stream
+
+与 HTTP API 使用同一服务端口；公网必须使用 WSS。浏览器 WebSocket 不能设置自定义 `Authorization` 请求头，连接建立后 **7 秒内**发送首条 JSON 消息：
+
+```json
+{ "type": "auth", "token": "qry_YOUR_QUERY_TOKEN" }
+```
+
+认证成功返回 `{ "type": "ready" }`。新短信识别并成功入库，且当前仍在后台有效期内时，服务端发送 `{ "type": "code.created", "id": "消息UUID", "signature": "示例服务", "deviceId": "设备UUID", "receivedAt": 1791360000000 }`。事件**不含明文验证码**；客户端收到事件后调用 `/api/v1/codes/recent` 获取当前有效记录。重复上传、过期短信、越权签名/设备及禁用设备不产生该连接可见的事件。
+
+客户端每 20 秒可发送 `{ "type": "ping" }`，服务端返回 `{ "type": "pong" }`；服务端另有 WebSocket 心跳。每个查询 Token 最多 3 个并发连接，全局最多 200 个连接；认证失败、Token 撤销或过期后连接关闭。`stream.connect` 和成功推送的 `stream.push` 留下审计，不记录完整 Token 或验证码。断线后不会重放事件，重连应调用 `/recent` 补查；浏览器关闭时无法实时推送。
+
 ## 错误
 
 | HTTP | code                             | 说明                                       |
@@ -94,7 +116,7 @@
 | GET    | /settings                 | `{ retentionDays, auditRetentionDays, codeMaxAgeSeconds }`                          |
 | PUT    | /settings                 | 全量更新上述三个字段，立即清理超保留期数据                                          |
 
-分页默认 page=1、pageSize=20，pageSize 最多 100；from/to 为时间戳。审计 action 筛选可选 query/upload/admin.reveal/admin.login（留空全部），status 为 success/failure（留空全部）。管理操作也写入审计；不记录请求 body、明文验证码或完整 Token。
+分页默认 page=1、pageSize=20，pageSize 最多 100；from/to 为时间戳。审计 action 筛选可选 query/query.recent/stream.connect/stream.push/upload/admin.reveal/admin.login（留空全部），status 为 success/failure（留空全部）。管理操作也写入审计；不记录请求 body、明文验证码或完整 Token。
 
 识别规则 keyword 留空使用默认关键词，codeLength=0 自动匹配（数字 4～8、字母数字 4～10）；固定长度可为 4～10（数字最多 8），alphabet 为 digits/alphanumeric。规则只影响新上传，不重新解析旧数据。候选验证码须在关键词附近最多 32 字符范围内。
 

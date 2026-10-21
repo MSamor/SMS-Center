@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SMS Center - 连接设置</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="options-page">
+    <main class="options-shell">
+      <header class="page-header">
+        <span class="brand-icon" aria-hidden="true">#</span>
+        <div><strong>SMS Center</strong><small>浏览器连接设置</small></div>
+      </header>
+      <form id="settings-form">
+        <label for="server-url">服务中心地址</label>
+        <input
+          id="server-url"
+          type="url"
+          placeholder="请输入你的服务中心根地址"
+          required
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <label for="query-token">查询 Token</label>
+        <input
+          id="query-token"
+          type="password"
+          placeholder="输入 qry_ 查询凭证"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <p class="field-note" id="token-note">
+          在管理中心「访问凭证」中创建仅授权所需签名和设备的查询 Token。
+        </p>
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+        <div class="form-actions">
+          <button type="submit" class="primary" id="save">验证并保存</button>
+          <button type="button" class="secondary" id="clear">移除连接</button>
+        </div>
+      </form>
+    </main>
+    <script type="module" src="options.js"></script>
+  </body>
+</html>

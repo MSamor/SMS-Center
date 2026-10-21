@@ -11,7 +11,7 @@ export function releaseNotes({ tag, image, digest, repository, sha, changes = ''
   const base = `https://github.com/${repository}`;
   return `# 💬 SMS Center ${tag}
 
-${info.prerelease ? '> 🧪 这是预发布版本，用于测试，不更新 Docker latest 标签。' : '> 📦 正式版本：Android APK 与 Vue + Node 一体化服务镜像。'}
+${info.prerelease ? '> 🧪 这是预发布版本，用于测试，不更新 Docker latest 标签。' : '> 📦 正式版本：Android APK、Chrome 插件与 Vue + Node 一体化服务镜像。'}
 
 ## ✨ 本次更新
 
@@ -24,6 +24,15 @@ ${changes.trim() || '本版本暂无自动生成的变更条目，请结合提�
 - APK 版本：\`${info.version}\`；versionCode：\`${info.versionCode}\`。
 - 使用相同发布签名的旧版本可覆盖升级；原 Debug 版本可能需要先卸载，卸载会删除 App 本地配置与排队数据。
 - 同时下载 \`SHA256SUMS.txt\`；Linux 可执行 \`sha256sum -c SHA256SUMS.txt\`，macOS 可执行 \`shasum -a 256 -c SHA256SUMS.txt\`。
+
+## 🌐 Chrome 插件
+
+- 从 Assets 下载 **sms-center-chrome-${tag}.zip**，解压后在 Chrome 127+ 的 chrome://extensions 打开开发者模式，选择「加载已解压的扩展程序」并指向解压目录。不要直接安装 ZIP 或下载源码压缩包替代插件。
+- 插件 ZIP 在独立构建任务中生成并校验，文件名及插件版本来自本次标签；SHA256SUMS.txt 同时包含 APK、插件 ZIP 和 Compose 配置的校验值。安装不需要额外的签名文件。
+- 在插件设置页填写 HTTPS 服务地址和管理中心创建的专用 qry_ 查询 Token；仅授权需要的短信签名及设备。
+- 新短信到达会尝试自动打开插件弹窗；无法打开时改用不含验证码的通知与角标。浏览器退出或断网期间仅在恢复连接后补查有效记录。
+- HTTPS 反向代理需允许 WebSocket Upgrade，并保持 WSS 长连接。
+- [插件配置和弹窗截图](${base}/blob/${tag}/README-SMS.md#chrome-浏览器插件)
 
 ## 🐳 Docker 镜像
 
@@ -75,7 +84,7 @@ Node 仅映射宿主机 \`127.0.0.1:3000\`，请配置 HTTPS 反向代理，参�
 - [API 文档](${base}/blob/${tag}/docs/API.md)
 - [本版本提交](${base}/commit/${sha})
 
-APK 校验文件与镜像 digest 用于核对下载的构建产物。此发布流程不代表新增功能已在所有手机型号验证。
+本页 Assets 同时包含 APK、Chrome 插件 ZIP、\`SHA256SUMS.txt\` 与 \`compose.release.yaml\`。APK 与插件 ZIP 的 SHA256 校验值以及镜像 digest 用于核对下载的构建产物。此发布流程不代表新增功能已在所有手机型号或浏览器环境验证。
 `;
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {

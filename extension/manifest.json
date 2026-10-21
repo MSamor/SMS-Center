@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "SMS Center 验证码",
+  "description": "接收 SMS Center 新验证码提醒，查看并复制有效期内的验证码。",
+  "version": "1.0.0",
+  "minimum_chrome_version": "127",
+  "permissions": ["storage", "alarms", "notifications"],
+  "optional_host_permissions": ["https://*/*", "http://localhost/*", "http://127.0.0.1/*"],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "action": { "default_title": "SMS Center 验证码", "default_popup": "popup.html" },
+  "options_page": "options.html",
+  "icons": { "16": "icon16.png", "48": "icon48.png", "128": "icon128.png" }
+}

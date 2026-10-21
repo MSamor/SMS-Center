@@ -9,6 +9,7 @@ import { fileURLToPath } from 'node:url';
 import { digest, secret, hashPassword, verifyPassword } from './crypto.js';
 import { getSettings, cleanup, issueToken, tokenRecord } from './db.js';
 import { extractCode, signatureOf } from './extract.js';
+import { authorizeToken, queryScope, assertQueryFilter, recentClauses } from './query-access.js';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../public');
 const name = z.string().trim().min(1).max(64);
 const id = z.string().uuid();
@@ -42,7 +43,7 @@ function decodeCookies(header = '') {
   }
   return result;
 }
-export function createApp({ db, config }) {
+export function createApp({ db, config, publishMessage = () => {} }) {
   const app = express();
   app.disable('x-powered-by');
   app.set('trust proxy', config.trustProxy || false);
@@ -83,6 +84,7 @@ export function createApp({ db, config }) {
     next();
   };
   app.use('/api/v1/codes/latest', audit('query'));
+  app.use('/api/v1/codes/recent', audit('query.recent'));
   app.use('/api/v1/sms', audit('upload'));
   app.use('/api/admin/login', audit('admin.login'));
   if (!config.testing)
@@ -105,9 +107,7 @@ export function createApp({ db, config }) {
     const bearer = req.headers.authorization;
     if (!bearer || !/^Bearer [A-Za-z0-9_-]{20,100}$/.test(bearer))
       throw fail(401, 'UNAUTHORIZED', '请提供有效的 Bearer Token');
-    const row = db.prepare('SELECT * FROM tokens WHERE hash=?').get(digest(bearer.slice(7)));
-    if (!row || row.revoked_at || (row.expires_at && row.expires_at <= Date.now()))
-      throw fail(401, 'UNAUTHORIZED', 'Token 无效、已撤销或已过期');
+    const row = authorizeToken(db, bearer.slice(7));
     req.apiToken = row;
     if (row.kind !== kind) throw fail(403, 'TOKEN_SCOPE', 'Token 类型不允许访问该接口');
     if (kind === 'upload') {
@@ -207,6 +207,16 @@ export function createApp({ db, config }) {
       db.prepare('UPDATE devices SET last_seen_at=? WHERE id=?').run(now, req.device.id);
     })();
     req.auditMessage = messageId;
+    try {
+      publishMessage({
+        id: messageId,
+        signature,
+        deviceId: req.device.id,
+        receivedAt: input.receivedAt,
+      });
+    } catch (error) {
+      console.error('验证码推送失败:', error.message);
+    }
     ok(res, { id: messageId, signature, duplicate: false }, 201);
   });
   app.get('/api/v1/codes/latest', apiAuth('query'), (req, res) => {
@@ -222,26 +232,19 @@ export function createApp({ db, config }) {
     );
     req.auditSignature = input.signature;
     req.auditDevice = input.deviceId || null;
-    const signatures = JSON.parse(req.apiToken.signatures),
-      devices = JSON.parse(req.apiToken.device_ids);
-    if (!signatures.includes('*') && !signatures.includes(input.signature))
-      throw fail(403, 'SIGNATURE_DENIED', 'Token 没有该短信签名的查询权限');
-    if (input.deviceId && devices.length && !devices.includes(input.deviceId))
-      throw fail(403, 'DEVICE_DENIED', 'Token 没有该设备的查询权限');
+    const scope = queryScope(req.apiToken);
+    assertQueryFilter(scope, input.signature, input.deviceId);
     const maxAge = Math.min(input.maxAgeSeconds || 86400, getSettings(db).codeMaxAgeSeconds);
-    const clauses = ['m.signature=?', 'm.received_at>=?', 'm.received_at<=?', 'd.enabled=1'];
-    const args = [input.signature, Date.now() - maxAge * 1000, Date.now()];
-    if (input.deviceId) {
-      clauses.push('m.device_id=?');
-      args.push(input.deviceId);
-    }
-    if (devices.length) {
-      clauses.push(`m.device_id IN (${devices.map(() => '?').join(',')})`);
-      args.push(...devices);
-    }
+    const { where, args } = recentClauses(
+      scope,
+      Date.now(),
+      maxAge,
+      input.signature,
+      input.deviceId,
+    );
     const row = db
       .prepare(
-        `SELECT m.* FROM messages m JOIN devices d ON d.id=m.device_id WHERE ${clauses.join(' AND ')} ORDER BY m.received_at DESC,m.uploaded_at DESC,m.id DESC LIMIT 1`,
+        `SELECT m.* FROM messages m JOIN devices d ON d.id=m.device_id WHERE ${where} ORDER BY m.received_at DESC,m.uploaded_at DESC,m.id DESC LIMIT 1`,
       )
       .get(...args);
     if (!row) throw fail(404, 'CODE_NOT_FOUND', '没有找到有效期内的验证码');
@@ -256,6 +259,43 @@ export function createApp({ db, config }) {
       deviceId: row.device_id,
       receivedAt: row.received_at,
       expiresAt: row.received_at + maxAge * 1000,
+    });
+  });
+  app.get('/api/v1/codes/recent', apiAuth('query'), (req, res) => {
+    const input = parse(
+      z.object({ ...paging, signature: name.optional(), deviceId: id.optional() }).strict(),
+      req.query,
+    );
+    const scope = queryScope(req.apiToken);
+    assertQueryFilter(scope, input.signature, input.deviceId);
+    req.auditSignature = input.signature || null;
+    req.auditDevice = input.deviceId || null;
+    const now = Date.now();
+    const ageSeconds = getSettings(db).codeMaxAgeSeconds;
+    const { where, args } = recentClauses(scope, now, ageSeconds, input.signature, input.deviceId);
+    const total = db
+      .prepare(
+        `SELECT COUNT(*) n FROM messages m JOIN devices d ON d.id=m.device_id WHERE ${where}`,
+      )
+      .get(...args).n;
+    const rows = db
+      .prepare(
+        `SELECT m.* FROM messages m JOIN devices d ON d.id=m.device_id WHERE ${where} ORDER BY m.received_at DESC,m.uploaded_at DESC,m.id DESC LIMIT ? OFFSET ?`,
+      )
+      .all(...args, input.pageSize, (input.page - 1) * input.pageSize);
+    ok(res, {
+      items: rows.map((row) => ({
+        id: row.id,
+        signature: row.signature,
+        code: config.box.decrypt(row.ciphertext, row.id).code,
+        deviceId: row.device_id,
+        receivedAt: row.received_at,
+        expiresAt: row.received_at + ageSeconds * 1000,
+      })),
+      total,
+      page: input.page,
+      pageSize: input.pageSize,
+      serverTime: now,
     });
   });
   app.use('/api/admin', checkOrigin);
@@ -578,7 +618,17 @@ export function createApp({ db, config }) {
       z
         .object({
           ...paging,
-          action: z.enum(['query', 'upload', 'admin.reveal', 'admin.login']).optional(),
+          action: z
+            .enum([
+              'query',
+              'query.recent',
+              'stream.connect',
+              'stream.push',
+              'upload',
+              'admin.reveal',
+              'admin.login',
+            ])
+            .optional(),
           signature: name.optional(),
           tokenId: id.optional(),
           status: z.enum(['success', 'failure']).optional(),

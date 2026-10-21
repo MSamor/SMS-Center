@@ -78,7 +78,7 @@ jobs:
           JS
 
   verify:
-    name: Test Node and Vue
+    name: Test Node, Vue and Chrome extension
     needs: prepare
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -177,6 +177,36 @@ jobs:
           if-no-files-found: ignore
           retention-days: 14
 
+  extension:
+    name: Build Chrome extension
+    needs: [prepare, verify]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      RELEASE_TAG: ${{ needs.prepare.outputs.tag }}
+    steps:
+      - name: Checkout tagged commit
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ needs.prepare.outputs.sha }}
+      - name: Set up Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+      - name: Package and verify Chrome extension
+        run: |
+          set -euo pipefail
+          name="sms-center-chrome-${RELEASE_TAG}.zip"
+          node scripts/package-extension.js "$RELEASE_TAG" "extension-dist/$name"
+          (cd extension-dist && sha256sum "$name" > EXTENSION_SHA256SUMS.txt && sha256sum -c EXTENSION_SHA256SUMS.txt)
+      - name: Upload extension asset
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: chrome-extension-release-asset
+          path: extension-dist/
+          if-no-files-found: error
+          retention-days: 14
+
   image:
     name: Build and push Docker Hub image
     needs: [prepare, verify, android]
@@ -241,7 +271,7 @@ jobs:
 
   publish:
     name: Publish GitHub Release
-    needs: [prepare, android, image]
+    needs: [prepare, android, extension, image]
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -267,6 +297,20 @@ jobs:
         with:
           name: signed-release-assets
           path: release-dist
+      - name: Download Chrome extension asset
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
+        with:
+          name: chrome-extension-release-asset
+          path: extension-dist
+      - name: Verify Chrome extension and combine release checksums
+        run: |
+          set -euo pipefail
+          name="sms-center-chrome-${RELEASE_TAG}.zip"
+          (cd extension-dist && sha256sum -c EXTENSION_SHA256SUMS.txt)
+          test -s "extension-dist/$name"
+          unzip -tq "extension-dist/$name"
+          cp "extension-dist/$name" release-dist/
+          cat extension-dist/EXTENSION_SHA256SUMS.txt >> release-dist/SHA256SUMS.txt
       - name: Generate release documentation
         env:
           CHANGELOG_FILE: release-changes.json
@@ -316,4 +360,5 @@ jobs:
           gh release edit "$RELEASE_TAG" "${options[@]}"
           echo "### Published $RELEASE_TAG" >> "$GITHUB_STEP_SUMMARY"
           echo "- APK: https://github.com/$GITHUB_REPOSITORY/releases/tag/$RELEASE_TAG" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Chrome extension: sms-center-chrome-$RELEASE_TAG.zip" >> "$GITHUB_STEP_SUMMARY"
           echo "- Image: \`$DOCKERHUB_IMAGE@$IMAGE_DIGEST\`" >> "$GITHUB_STEP_SUMMARY"
